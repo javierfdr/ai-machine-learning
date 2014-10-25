@@ -4,6 +4,7 @@
 % Category must have the number of rows of cluster_dist columns
 function [cHash] = plot_k_means(k, cluster_dist, categories)
     
+    %%Creating help hashes for plotting
     % create a hash for assigning a number to a category
     catNumHash = containers.Map();
     catName = containers.Map();
@@ -29,19 +30,28 @@ function [cHash] = plot_k_means(k, cluster_dist, categories)
         end
     end
     
-    symbol_list = ['rx';'bo';'g*';'yx';'mv';'c>';'k<';'b+';'yh';'rd';'ys';'g^'];
+    symbol_list = ['rx';'bo';'g*';'cx';'mv';'c>';'k<';'b+';'rh';'rd';'ys';'g^'];
     
+    %% Plotting the results
     figure('name','K-Means plot');
-    
+    clust_size=[];
     for ki=1:k
+        % the cluster is empty
+        if ~(cHash.isKey(num2str(ki)))
+            plot([],[],symbol_list(ki,:),'MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;
+            clust_size= [clust_size,0];
+            continue;
+        end
         cd_pair_list = cHash(num2str(ki));
+        clust_size= [clust_size,size(cd_pair_list(:,2),1)];
         plot(cd_pair_list(:,2),cd_pair_list(:,1),symbol_list(ki,:),'MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;
+        
     end
     
     % creating legend
     labels = {};
     for ki=1:k
-        labels{1,ki} = strcat('Cluster: ', num2str(ki));
+        labels{1,ki} = strcat('Cluster: ', num2str(ki),' s: ',num2str(clust_size(ki)));
     end
     
     cats = {};
