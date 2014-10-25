@@ -13,9 +13,9 @@ function [cluster_vector, centroids, niters] = fcm(c,data,max_iters,epsilon,m)
         for n = 1:n_samples
             for i = 1:c
                 dist_x_centi = pdist([data(n,:);centroids(i,:)],'euclidean');
-                dist_x = 0
+                dist_x = 0;
                 for j = 1:c
-                    dist_x = dist_x + (dist_x_centi/pdist([data(n,:);centroids(j,:)],'euclidean'))
+                    dist_x = dist_x + (dist_x_centi/pdist([data(n,:);centroids(j,:)],'euclidean'));
                 end
                 cluster_vector(n,c) = 1 / (dist_x)^(2/m-1);
             end
