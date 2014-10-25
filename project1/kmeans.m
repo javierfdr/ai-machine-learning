@@ -1,9 +1,11 @@
-function [cluster_vector, centroids, niters] = kmeans(k,data,max_iters)
+function [cluster_vector, centroids, niters] = kmeans(data,k,max_iters)
     niters = max_iters;
     centroids = datasample(data,k,'Replace',false);
     n_samples = size(data,1);
     cluster_vector = [zeros(n_samples,1),(ones(n_samples,1).*realmax)];
     prev_centroids = ones(size(centroids))*realmax;
+    % find new centroids and redistribute until no new centroid is
+    % calculated or the max number of iterations is reached
     while ~isequal(prev_centroids, centroids) && (niters > 0)
         for n = 1:n_samples
             min_d = realmax;
@@ -16,6 +18,7 @@ function [cluster_vector, centroids, niters] = kmeans(k,data,max_iters)
                     min_d = d;
                 end
             end
+            % replaces current best centroid and distance for point n
             cluster_vector(n,1) = min_c;
             cluster_vector(n,2) = min_d;
         end
@@ -23,10 +26,13 @@ function [cluster_vector, centroids, niters] = kmeans(k,data,max_iters)
         for cent = 1:k
             points_bag = [];
             for n = 1:n_samples
+                % group together the points of the same cluster
                 if cluster_vector(n,1) == cent
                     points_bag = [points_bag;data(n,:)];
                 end
             end
+            % recalculate centroid as the mean of the set of points
+            % belonging to the same cluster
             centroids(cent,:)= mean(points_bag);
         end
         niters = niters - 1;
