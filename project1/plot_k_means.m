@@ -45,12 +45,12 @@ function [cHash] = plot_k_means(k, cluster_dist, categories)
     end
     
     cats = {};
-    for ki=1:k
+    for ki=1:size(catName,1)
         cats{1,ki} = strcat(catName(num2str(ki)));
     end
     
     legend(labels,'FontSize',14,'FontWeight','bold');
-    set(gca, 'XTick',1:5, 'XTickLabel',cats);
+    set(gca, 'XTick',1:size(catName,1), 'XTickLabel',cats);
 
 
 end
