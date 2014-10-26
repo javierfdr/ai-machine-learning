@@ -1,6 +1,11 @@
-function [cluster_vector, centroids, niters] = kmeans(data,k,max_iters)
+function [cluster_vector, centroids, niters] = kmeans(data,k,max_iters, k_seeds)
     niters = max_iters;
-    centroids = datasample(data,k,'Replace',false);
+    
+    if size(k_seeds,1)==0
+        centroids = datasample(data,k,'Replace',false);
+    else
+        centroids = k_seeds;
+    end
     n_samples = size(data,1);
     cluster_vector = [zeros(n_samples,1),(ones(n_samples,1).*realmax)];
     prev_centroids = ones(size(centroids))*realmax;

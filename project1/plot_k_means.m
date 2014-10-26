@@ -33,7 +33,7 @@ function [cHash] = plot_k_means(k, cluster_dist, categories)
     symbol_list = ['rx';'bo';'g*';'cx';'mv';'c>';'k<';'b+';'rh';'rd';'ys';'g^'];
     
     %% Plotting the results
-    figure('name','K-Means plot');
+    figure('name',strcat('Results for zoo.arff ',num2str(k),'-means'));
     clust_size=[];
     for ki=1:k
         % the cluster is empty
@@ -45,7 +45,6 @@ function [cHash] = plot_k_means(k, cluster_dist, categories)
         cd_pair_list = cHash(num2str(ki));
         clust_size= [clust_size,size(cd_pair_list(:,2),1)];
         plot(cd_pair_list(:,2),cd_pair_list(:,1),symbol_list(ki,:),'MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;
-        
     end
     
     % creating legend
