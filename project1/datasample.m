@@ -5,7 +5,7 @@
 function sample = datasample(data, nSample, dummy_var, replacement)
     nRows = size(data,1);
 
-    if ~exist(dummy_var) || (dummy_var == 'Replacement' && replacement == false)
+    if ~exist('dummy_var') || (dummy_var == 'Replace' && replacement == false)
         % Sampling without replacement:
         rndIDX = randperm(nRows); 
         sample = data(rndIDX(1:nSample), :);
