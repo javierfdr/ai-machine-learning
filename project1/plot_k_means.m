@@ -1,3 +1,7 @@
+% Introduction to Machine Learning (IML) - project 1
+% Javier Fernandez (javierfdr@gmail.com)
+% Alejandro Hernandez (alejandro.ajhr@gmail.com)
+
 % Plot k_means result where x value is the cluster number,
 % y value is the distance to the cluster centroid and 
 % the pt color corresponds to category

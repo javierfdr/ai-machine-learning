@@ -1,3 +1,7 @@
+% Introduction to Machine Learning (IML) - project 1
+% Javier Fernandez (javierfdr@gmail.com)
+% Alejandro Hernandez (alejandro.ajhr@gmail.com)
+
 function [data_struct, cluster_vector, centroids, niters, err] = zoo_fcm(file,k,niters)
     pf = arffparser('read',file);
     data_struct = pf;

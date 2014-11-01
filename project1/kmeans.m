@@ -1,3 +1,7 @@
+% Introduction to Machine Learning (IML) - project 1
+% Javier Fernandez (javierfdr@gmail.com)
+% Alejandro Hernandez (alejandro.ajhr@gmail.com)
+
 function [cluster_vector, centroids, niters] = kmeans(data,k,max_iters, k_seeds)
     niters = max_iters;
     

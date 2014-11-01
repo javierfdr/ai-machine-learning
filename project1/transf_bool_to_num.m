@@ -1,3 +1,7 @@
+% Introduction to Machine Learning (IML) - project 1
+% Javier Fernandez (javierfdr@gmail.com)
+% Alejandro Hernandez (alejandro.ajhr@gmail.com)
+
 % Converts an horizontal vector of 'true'/'false' values to a 1/0 vector
 % of the same dimensions
 function [t_vector] = transf_bool_to_num(vector)

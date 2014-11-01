@@ -1,3 +1,7 @@
+% Introduction to Machine Learning (IML) - project 1
+% Javier Fernandez (javierfdr@gmail.com)
+% Alejandro Hernandez (alejandro.ajhr@gmail.com)
+
 % Processes the standarized_data applying k-means to each k in klist with
 % a maximum of niters number of iterations for each kmeans run.
 % The results of each run are plotted and the a performance graph
@@ -53,5 +57,5 @@ function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts,
     
     xlabel('Value of K. Each line color is an attempt');
     ylabel('Adjusted index result');
-    
+
 end
