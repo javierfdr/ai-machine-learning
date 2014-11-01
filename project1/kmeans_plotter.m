@@ -38,14 +38,14 @@ function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts,
             % calculate adjusted rand-index
             k_means_clusters = cluster_vector(:,1)';
             [AR,RI,MI,HI]=RandIndex(k_means_clusters, target_clusters);
+            k_means_clusters
+            target_clusters
             adjusted_i_list = [adjusted_i_list, AR];
         end
         attempts_adjusted_i_list = [attempts_adjusted_i_list;adjusted_i_list];
     end
     
-    figure('name','Adjusted Rand Index for several k-means run on zoo.arff');
-    
-    
+    figure('name','Adjusted Rand Index for several k-means run on zoo.arff');    
     for attempt_count=1:nattempts
         symbol_list = ['b-';'r-';'c-';'m-'];
         plot(klist, attempts_adjusted_i_list(attempt_count,:),symbol_list(attempt_count,1),klist, attempts_adjusted_i_list(attempt_count,:),'ro','MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;
@@ -53,6 +53,5 @@ function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts,
     
     xlabel('Value of K. Each line color is an attempt');
     ylabel('Adjusted index result');
-    
     
 end
