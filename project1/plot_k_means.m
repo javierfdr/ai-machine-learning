@@ -38,7 +38,7 @@ function [cHash] = plot_k_means(k, cluster_dist, categories)
     for ki=1:k
         % the cluster is empty
         if ~(cHash.isKey(num2str(ki)))
-            plot([],[],symbol_list(ki,:),'MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;
+            plot([],[],'','MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;
             clust_size= [clust_size,0];
             continue;
         end

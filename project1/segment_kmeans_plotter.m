@@ -3,9 +3,9 @@
 % The results of each run are plotted and the a performance graph
 % is returned. This process is repeated nattempts times understanding
 % the variability of the results
-function [] = zoo_kmeans_plotter(file,klist,niters,nattempts, plot_graph)
+function [] = segment_kmeans_plotter(file,klist,niters,nattempts, plot_graph)
     
-    [standarized_data, data_struct] = prepare_zoo_kmeans(file);
-    kmeans_plotter(standarized_data, data_struct.type.values()', klist, niters, nattempts, plot_graph);
+    [standarized_data, data_struct] = prepare_segment_kmeans(file);
+    kmeans_plotter(standarized_data, data_struct.class.values()', klist, niters, nattempts, plot_graph);
    
 end
