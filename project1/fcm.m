@@ -1,3 +1,7 @@
+% Introduction to Machine Learning (IML) - project 1
+% Javier Fernandez (javierfdr@gmail.com)
+% Alejandro Hernandez (alejandro.ajhr@gmail.com)
+
 function [cluster_vector, centroids, niters, err] = fcm(data,c,max_iters,m,epsilon)
     niters = max_iters;
     blank = ones(1,size(data,2));

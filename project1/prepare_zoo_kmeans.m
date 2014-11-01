@@ -1,3 +1,7 @@
+% Introduction to Machine Learning (IML) - project 1
+% Javier Fernandez (javierfdr@gmail.com)
+% Alejandro Hernandez (alejandro.ajhr@gmail.com)
+
 function [std_data_matrix, parsed_data] = prepare_zoo_kmeans(file)
     pf = arffparser('read',file);
     data_struct = pf;
