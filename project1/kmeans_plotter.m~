@@ -7,7 +7,7 @@
 % The results of each run are plotted and the a performance graph
 % is returned. This process is repeated nattempts times understanding
 % the variability of the results
-function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts, performance_it, plot_graph, plot_silhouette)
+function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts, plot_graph, plot_silhouette)
     
     k_max = max(klist);    
     attempts_adjusted_i_list = [];
@@ -21,7 +21,7 @@ function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts,
         
         for i=1:size(klist,1)  
             %[cluster_vector, centroids, niters] = kmeans(standarized_data,klist(i),niters,k_seeds(1:klist(i),:),5);
-            [cluster_vector, centroids, niters] = kmeans(standarized_data,klist(i),niters,[],performance_it);
+            [cluster_vector, centroids, niters] = kmeans(standarized_data,klist(i),niters,[],5);
             if plot_graph
                 plot_k_means(klist(i),cluster_vector,categories);
                 [newData, Dmean, Deivec, Deival ] = pca(standarized_data, 2); 
@@ -34,8 +34,7 @@ function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts,
                 ylabel 'Cluster';
                 mean_sil = mean(s);
             else
-                s = silhouette(standarized_data,cluster_vector(:,1));
-                mean_sil = mean(s);      
+                
             end
 
             %%Creating help hashes for assigning the target category cluster
@@ -67,8 +66,8 @@ function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts,
     
     figure('name','Adjusted Rand Index for several k-means run on zoo.arff');    
     for attempt_count=1:nattempts
-        symbol_list = ['b-';'r-';'c-';'m-';'y-';'k-';'g-'];
-        plot(klist, attempts_adjusted_i_list(attempt_count,:),symbol_list(mod(attempt_count,7),1),klist, attempts_adjusted_i_list(attempt_count,:),'ro','MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;
+        symbol_list = ['b-';'r-';'c-';'m-'];
+        plot(klist, attempts_adjusted_i_list(attempt_count,:),symbol_list(attempt_count,1),klist, attempts_adjusted_i_list(attempt_count,:),'ro','MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;
     end
     
     xlabel('Value of K. Each line color is an attempt');
@@ -76,8 +75,8 @@ function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts,
     
     figure('name','Silhouette means');    
     for attempt_count=1:nattempts
-        symbol_list = ['b-';'r-';'c-';'m-';'y-';'k-';'g-'];
-        plot(klist, attempts_sil_mean_list(attempt_count,:),symbol_list(mod(attempt_count,7),1),klist, attempts_sil_mean_list(attempt_count,:),'ro','MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;
+        symbol_list = ['b-';'r-';'c-';'m-'];
+        plot(klist, attempts_sil_mean_list(attempt_count,:),symbol_list(attempt_count,1),klist, attempts_sil_mean_list(attempt_count,:),'ro','MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;
     end
     
     xlabel('Value of K. Each line color is an attempt');

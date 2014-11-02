@@ -13,7 +13,7 @@ function [newData, Dmean, Deivec, Deival ] = pca(Data, newDim)
 	
 	% Obtaining eigenvectors and eigenvalues
     [Deivec, Deival] = eig(Dcov);
-    Deival = diag(Deival)
+    Deival = diag(Deival);
     
     % Sort eigenvectors
     [svalues, sindexes] = sort(Deival, 'descend');
