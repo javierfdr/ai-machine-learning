@@ -14,7 +14,7 @@ function [cluster_vector, p_cluster_vector, centroids, niters, err] = pfcm(data,
     m21 = 2 / (fm - 1);
     n11 = 1 / (fn - 1);
     
-    % Estimating Gamma
+    % Estimating Gamma for PFCM with FCM
     [cv_fcm, cent_fcm, it_fcm, err_fcm] = fcm(data,c,niters,fm,epsilon);
     for i = 1:c
         dist_x_cent = 0;
@@ -36,7 +36,7 @@ function [cluster_vector, p_cluster_vector, centroids, niters, err] = pfcm(data,
                 dist_x = 0;
                 for j = 1:c
                     dist_x_centj = pdist([data(n,:);centroids(j,:)],'euclidean');
-                    dist_x = dist_x + ((dist_x_centi/dist_x_centj)^(m21));
+                    dist_x = dist_x + ((dist_x_centi/dist_x_centj)^m21);
                 end
                 cluster_vector(n,i) = 1 / dist_x;
             end
@@ -45,7 +45,7 @@ function [cluster_vector, p_cluster_vector, centroids, niters, err] = pfcm(data,
         for i = 1:c
             for n = 1:n_samples
                 dist_x_centi = pdist([data(n,:);centroids(i,:)],'euclidean');
-                p_cluster_vector(n,i) = 1 / 1 + (bg(i)*(dist_x_centi^2))^n11;
+                p_cluster_vector(n,i) = 1 / (1 + ((bg(i)*(dist_x_centi^2))^n11));
             end
         end        
         
