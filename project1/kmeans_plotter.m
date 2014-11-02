@@ -12,16 +12,23 @@ function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts,
     k_max = max(klist);    
     attempts_adjusted_i_list = [];
     attempts_sil_mean_list = [];
+    
+    % update seed for per-attempt rand_seed generation
+    rng(1);
+    
     for attempt_count=1:nattempts
         adjusted_i_list = [];
         sil_mean_list = [];
+        
+        % generate a seed number for this attempt
+        rand_seed = randi(50000);
         
         % calculate k_max seeds to be used for each attempt iteration
         %k_seeds = datasample(standarized_data,k_max,'Replace',false);
         
         for i=1:size(klist,1)  
             %[cluster_vector, centroids, niters] = kmeans(standarized_data,klist(i),niters,k_seeds(1:klist(i),:),5);
-            [cluster_vector, centroids, niters] = kmeans(standarized_data,klist(i),niters,[],performance_it);
+            [cluster_vector, centroids, niters] = kmeans(standarized_data,klist(i),niters,max(klist),rand_seed, performance_it);
             if plot_graph
                 plot_k_means(klist(i),cluster_vector,categories);
                 [newData, Dmean, Deivec, Deival ] = pca(standarized_data, 2); 
@@ -65,7 +72,7 @@ function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts,
         attempts_sil_mean_list = [attempts_sil_mean_list;sil_mean_list];
     end
     
-    figure('name','Adjusted Rand Index for several k-means run on zoo.arff');    
+    figure('name','Adjusted Rand Index for several k-means');    
     for attempt_count=1:nattempts
         symbol_list = ['b-';'r-';'c-';'m-';'y-';'k-';'g-'];
         plot(klist, attempts_adjusted_i_list(attempt_count,:),symbol_list(mod(attempt_count,7),1),klist, attempts_adjusted_i_list(attempt_count,:),'ro','MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;

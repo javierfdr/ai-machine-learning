@@ -4,29 +4,45 @@
 
 % Executes kmeans algorithm to a nxm matrix of data examples defined by
 % 'data', choosing a 'k' number of clusters and running for a maximum of
-% 'max_iters' iterations. 'k_seeds' is a list of previously calculated
-% seeds for the 'k' initial starting points and can be supplied as an empty
-% list. 'performance_it' indicates the number of internal iterations to be
+% 'max_iters' iterations. 'k_seed_num' is the maximum num of k being used
+%  while testing different k's, in order to generate consistent centroids 
+% (first maxk - k centroids are the same).
+% 'seed' specifies a seed number for random number generator. If 0 is given
+% a custom seed is used
+% 'performance_it' indicates the number of internal iterations to be
 % run on kmeans to reach a result with the best performance in point to
 % cluster centroid distance.
 % The function returns 'cluster_vector' a nx2 matrix indicating the cluster
 % assigned to each example ni and the distance to the centroid.
 % 'centroids' the final centroids converged. 
 % 'niters' number of iterations reached until kmeans converged
-function [cluster_vector, centroids, niters] = kmeans(data,k,max_iters, k_seeds, performance_it)
+function [cluster_vector, centroids, niters] = kmeans(data,k,max_iters, k_seed_num, seed, performance_it)
     disp(strcat('Running k-means with values k:',num2str(k),' max_iters:',num2str(max_iters),' performance_iters: ',num2str(performance_it)));
     best_clus_vector = [];
     best_centroids = [];
     best_niters = [];
     best_performance = realmin;
+    
+    % setting the random seed
+    if seed==0
+        rng(12002001);
+    else
+        rng(seed);
+    end
     for p=1:performance_it
         disp(strcat('k-means internal iter ',num2str(p),'/',num2str(performance_it)));
         niters = max_iters;
-        if size(k_seeds,1)==0
-            centroids = datasample(data,k,'Replace',false);
-        else
-            centroids = k_seeds;
+        
+        % picking k random points from data for each centroid
+        % first k centroids are the same for a different k
+        rand_data = randperm(size(data,2),k_seed_num);
+        centroids=[];
+        for i=1:k
+            centroids=[centroids;data(rand_data(i),:)];
         end
+        
+        %centroids = datasample(data,k,'Replace',false)
+        
         n_samples = size(data,1);
         cluster_vector = [zeros(n_samples,1),(ones(n_samples,1).*realmax)];
         prev_centroids = ones(size(centroids))*realmax;
@@ -70,12 +86,10 @@ function [cluster_vector, centroids, niters] = kmeans(data,k,max_iters, k_seeds,
         performance = mean(s); 
         
         if performance > best_performance
-            best_performance = performance;
+            best_performance = performance
             best_clus_vector = cluster_vector;
             best_centroids = centroids;
             best_niters = niters;
-            %disp(strcat('Best value found. numiters:',num2str(best_niters),' ',num2str(best_performance)));
-            disp(num2str(best_performance));
         end   
     end
 end
