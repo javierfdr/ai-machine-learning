@@ -1,3 +1,7 @@
+% Introduction to Machine Learning (IML) - project 1
+% Javier Fernandez (javierfdr@gmail.com)
+% Alejandro Hernandez (alejandro.ajhr@gmail.com)
+
 function arindex = adjusted_randindex(found_clusters,expert_clusters)
 
     n=length(found_clusters);
