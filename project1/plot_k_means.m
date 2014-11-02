@@ -8,6 +8,8 @@
 % Category must have the number of rows of cluster_dist columns
 function [cHash] = plot_k_means(k, cluster_dist, categories, save,name)
     
+    is_visible = 'off';
+
     %%Creating help hashes for plotting
     % create a hash for assigning a number to a category
     catNumHash = containers.Map();
@@ -37,7 +39,7 @@ function [cHash] = plot_k_means(k, cluster_dist, categories, save,name)
     symbol_list = ['rx';'bo';'g*';'cx';'mv';'c>';'k<';'b+';'rh';'rd';'ys';'g^'];
     
     %% Plotting the results
-    pca_h = figure('name',strcat('Results',num2str(k),'-means'));
+    pca_h = figure('name',strcat('Results',num2str(k),'-means'),'visible',is_visible);
     clust_size=[];
     for ki=1:k
         % the cluster is empty

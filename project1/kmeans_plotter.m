@@ -9,6 +9,8 @@
 % the variability of the results
 function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts, performance_it, plot_graph, plot_silhouette, save_file_path)
     
+    is_visible = 'off';
+
     k_max = max(klist);    
     attempts_adjusted_i_list = [];
     attempts_sil_mean_list = [];
@@ -39,7 +41,7 @@ function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts,
             end
             
             if plot_silhouette
-                h = figure('name',strcat('Silhouette for k: ',num2str(klist(i))));
+                h = figure('name',strcat('Silhouette for k: ',num2str(klist(i))),'visible',is_visible);
                 [s,h] = silhouette(standarized_data,cluster_vector(:,1));
                 xlabel 'Silhouette Value';
                 ylabel 'Cluster';
@@ -79,7 +81,7 @@ function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts,
         attempts_sil_mean_list = [attempts_sil_mean_list;sil_mean_list];
     end
     
-    h = figure('name','Adjusted Rand Index for several k-means');    
+    h = figure('name','Adjusted Rand Index for several k-means','visible',is_visible);    
     for attempt_count=1:nattempts
         symbol_list = ['b-';'r-';'c-';'m-';'y-';'k-';'g-'];
         plot(klist, attempts_adjusted_i_list(attempt_count,:),symbol_list(mod(attempt_count,7),1),klist, attempts_adjusted_i_list(attempt_count,:),'ro','MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;
@@ -91,7 +93,7 @@ function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts,
     plot_name = strcat(save_file_path,'adjusted-rand-index',num2str(attempt_count));
     saveas(h,plot_name,'png');
     
-    h = figure('name','Silhouette means');    
+    h = figure('name','Silhouette means','visible',is_visible);    
     for attempt_count=1:nattempts
         symbol_list = ['b-';'r-';'c-';'m-';'y-';'k-';'g-'];
         plot(klist, attempts_sil_mean_list(attempt_count,:),symbol_list(mod(attempt_count,7),1),klist, attempts_sil_mean_list(attempt_count,:),'ro','MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;

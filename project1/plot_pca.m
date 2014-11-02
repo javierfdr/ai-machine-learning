@@ -1,5 +1,8 @@
 function [cHash] = plot_pca(k, cluster_vector, categories, pca_data, save, plot_name)
     
+    is_visible = 'off';
+
+
     %%Creating help hashes for plotting
     % create a hash for assigning a number to a category
     catNumHash = containers.Map();
@@ -28,7 +31,7 @@ function [cHash] = plot_pca(k, cluster_vector, categories, pca_data, save, plot_
     symbol_list = ['rx';'bo';'g*';'cx';'mv';'c>';'k<';'b+';'rh';'rd';'ys';'g^'];
     
     %% Plotting the results
-    pca_h = figure('name',strcat('PCA ',num2str(k),'-means'));
+    pca_h = figure('name',strcat('PCA ',num2str(k),'-means'),'visible',is_visible);
     clust_size=[];
     for ki=1:k
         % the cluster is empty
