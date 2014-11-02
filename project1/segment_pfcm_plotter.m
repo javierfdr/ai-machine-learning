@@ -7,9 +7,9 @@
 % The results of each run are plotted and the a performance graph
 % is returned. This process is repeated nattempts times understanding
 % the variability of the results
-function [] = segment_kmeans_plotter(file,klist,niters,nattempts, performance_it, plot_graph, plot_silhouette)
+function [] = segment_pfcm_plotter(file,klist,niters,nattempts, performance_it, plot_graph, plot_silhouette)
     
     [standarized_data, data_struct] = prepare_segment_kmeans(file);
-    kmeans_plotter(standarized_data, data_struct.class.values()', klist, niters, nattempts,performance_it, plot_graph, plot_silhouette, 'generated_files/kmeans/segment/');
+    pfcm_plotter(standarized_data, data_struct.class.values()', klist, niters, nattempts,performance_it, plot_graph, plot_silhouette, 'generated_files/pfcm/segment/');
    
 end
