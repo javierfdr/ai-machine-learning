@@ -1,7 +1,7 @@
-function [] = plot_zoo_pca_data(file)
+function [] = plot_segment_pca_data(file)
     
-    [standarized_data, data_struct] = prepare_zoo_kmeans(file);
-    categories = data_struct.type.values()';
+    [standarized_data, data_struct] = prepare_segment_kmeans(file);
+    categories = data_struct.class.values()';
 
     %%Creating help hashes for plotting
     % create a hash for assigning a number to a category
@@ -25,6 +25,6 @@ function [] = plot_zoo_pca_data(file)
     [newData, Dmean, Deivec, Deival ] = pca(standarized_data, 2);
     
     % plotting pca from standarized data
-    plot_pca([7],cv,categories,newData,true,'generated_files/pca/zoo/pca-plot');
+    plot_pca([19],cv,categories,newData,true,'generated_files/pca/segment/pca-plot');
 
 end   
