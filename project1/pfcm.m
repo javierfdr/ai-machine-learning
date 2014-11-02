@@ -64,7 +64,7 @@ function [cluster_vector, f_cluster_vector, p_cluster_vector, centroids, niters,
     
     % Crisp cluster vector asigning each point to the most probable cluster
     [cluster_vector_prob , cluster_vector_cent] = max(f_cluster_vector,[],2);
-    cluster_vector = [cluster_vector_prob , cluster_vector_cent];
+    cluster_vector = [cluster_vector_cent, cluster_vector_prob];
     
     % Rounding and Output
     if round_results == true
