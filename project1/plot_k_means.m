@@ -6,7 +6,7 @@
 % y value is the distance to the cluster centroid and 
 % the pt color corresponds to category
 % Category must have the number of rows of cluster_dist columns
-function [cHash] = plot_k_means(k, cluster_dist, categories)
+function [cHash] = plot_k_means(k, cluster_dist, categories, save,name)
     
     %%Creating help hashes for plotting
     % create a hash for assigning a number to a category
@@ -37,7 +37,7 @@ function [cHash] = plot_k_means(k, cluster_dist, categories)
     symbol_list = ['rx';'bo';'g*';'cx';'mv';'c>';'k<';'b+';'rh';'rd';'ys';'g^'];
     
     %% Plotting the results
-    figure('name',strcat('Results',num2str(k),'-means'));
+    pca_h = figure('name',strcat('Results',num2str(k),'-means'));
     clust_size=[];
     for ki=1:k
         % the cluster is empty
@@ -65,5 +65,8 @@ function [cHash] = plot_k_means(k, cluster_dist, categories)
     legend(labels,'FontSize',14,'FontWeight','bold');
     set(gca, 'XTick',1:size(catName,1), 'XTickLabel',cats);
 
+    if save
+        saveas(pca_h,name,'png');
+    end
 
 end

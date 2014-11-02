@@ -10,6 +10,6 @@
 function [] = zoo_kmeans_plotter(file,klist,niters,nattempts, performance_it, plot_graph, plot_silhouette)
     
     [standarized_data, data_struct] = prepare_zoo_kmeans(file);
-    kmeans_plotter(standarized_data, data_struct.type.values()', klist, niters, nattempts,performance_it, plot_graph, plot_silhouette);
+    kmeans_plotter(standarized_data, data_struct.type.values()', klist, niters, nattempts,performance_it, plot_graph, plot_silhouette, 'generated_files/kmeans/zoo/');
    
 end

@@ -1,4 +1,4 @@
-function [cHash] = plot_pca(k, cluster_vector, categories, pca_data)
+function [cHash] = plot_pca(k, cluster_vector, categories, pca_data, save, plot_name)
     
     %%Creating help hashes for plotting
     % create a hash for assigning a number to a category
@@ -28,7 +28,7 @@ function [cHash] = plot_pca(k, cluster_vector, categories, pca_data)
     symbol_list = ['rx';'bo';'g*';'cx';'mv';'c>';'k<';'b+';'rh';'rd';'ys';'g^'];
     
     %% Plotting the results
-    figure('name',strcat('PCA ',num2str(k),'-means'));
+    pca_h = figure('name',strcat('PCA ',num2str(k),'-means'));
     clust_size=[];
     for ki=1:k
         % the cluster is empty
@@ -41,11 +41,11 @@ function [cHash] = plot_pca(k, cluster_vector, categories, pca_data)
         clust_size= [clust_size,size(cd_pair_list(:,2),1)];
         plot(cd_pair_list(:,1),cd_pair_list(:,2),symbol_list(ki,:),'MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;
     end
-    
+ 
     % creating legend
     labels = {};
     for ki=1:k
-        labels{1,ki} = strcat('C-',num2str(ki),':',num2str(clust_size(ki)),' ',catName(num2str(ki)));
+        labels{1,ki} = strcat('C-',num2str(ki),':',num2str(clust_size(ki)));
     end
     
     cats = {};
@@ -54,5 +54,9 @@ function [cHash] = plot_pca(k, cluster_vector, categories, pca_data)
     end
     
     legend(labels,'FontSize',14,'FontWeight','bold');
+    
+    if save
+        saveas(pca_h,plot_name,'png');
+    end   
 
 end

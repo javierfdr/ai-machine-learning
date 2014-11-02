@@ -3,6 +3,8 @@
 % Alejandro Hernandez (alejandro.ajhr@gmail.com)
 
 function [cluster_vector, f_cluster_vector, p_cluster_vector, centroids, niters, err] = pfcm(data, c, max_iters, fm, fn, fa, fb, epsilon, round_results)
+    disp(strcat('Running PFCM with c:',num2str(c),' and niters: ',num2str(max_iters)));
+
     niters = max_iters;
     blank = ones(1,size(data,2));
     centroids = rand(c,size(data,2));

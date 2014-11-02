@@ -16,7 +16,7 @@
 % assigned to each example ni and the distance to the centroid.
 % 'centroids' the final centroids converged. 
 % 'niters' number of iterations reached until kmeans converged
-function [cluster_vector, centroids, niters] = kmeans(data,k,max_iters, k_seed_num, seed, performance_it)
+function [cluster_vector, centroids, num_iters_kmean] = kmeans(data,k, max_iters, k_seed_num, seed, performance_it)
     disp(strcat('Running k-means with values k:',num2str(k),' max_iters:',num2str(max_iters),' performance_iters: ',num2str(performance_it)));
     best_clus_vector = [];
     best_centroids = [];
@@ -31,7 +31,7 @@ function [cluster_vector, centroids, niters] = kmeans(data,k,max_iters, k_seed_n
     end
     for p=1:performance_it
         disp(strcat('k-means internal iter ',num2str(p),'/',num2str(performance_it)));
-        niters = max_iters;
+        num_iters_kmean = max_iters;
         
         % picking k random points from data for each centroid
         % first k centroids are the same for a different k
@@ -48,7 +48,7 @@ function [cluster_vector, centroids, niters] = kmeans(data,k,max_iters, k_seed_n
         prev_centroids = ones(size(centroids))*realmax;
         % find new centroids and redistribute until no new centroid is
         % calculated or the max number of iterations is reached
-        while ~isequal(prev_centroids, centroids) && (niters > 0)
+        while ~isequal(prev_centroids, centroids) && (num_iters_kmean > 0)
             for n = 1:n_samples
                 min_d = realmax;
                 min_c = 0;
@@ -77,9 +77,9 @@ function [cluster_vector, centroids, niters] = kmeans(data,k,max_iters, k_seed_n
                 % belonging to the same cluster
                 centroids(cent,:)= mean(points_bag);
             end
-            niters = niters - 1;
+            num_iters_kmean = num_iters_kmean - 1;
         end
-        niters = max_iters-niters;
+        num_iters_kmean = max_iters-num_iters_kmean
         %performance = sum(cluster_vector(:,2));
         
         s = silhouette(data,cluster_vector(:,1));
@@ -89,7 +89,7 @@ function [cluster_vector, centroids, niters] = kmeans(data,k,max_iters, k_seed_n
             best_performance = performance
             best_clus_vector = cluster_vector;
             best_centroids = centroids;
-            best_niters = niters;
+            best_niters = num_iters_kmean;
         end   
     end
 end
