@@ -15,8 +15,8 @@ function [] = pfcm_plotter(standarized_data,categories,klist,niters,nattempts, p
     rng(333);
     
     % pfcm predefined parameters
-    fm = 2;
-    fn = 2;
+    fm = 1.15;
+    fn = 1.15;
     fa = 1;
     fb = 1;
     epsilon = 1e-6;
