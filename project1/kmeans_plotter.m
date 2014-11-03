@@ -30,7 +30,7 @@ function [] = kmeans_plotter(standarized_data,categories,klist,niters,nattempts,
         
         for i=1:size(klist,1)  
             %[cluster_vector, centroids, niters] = kmeans(standarized_data,klist(i),niters,k_seeds(1:klist(i),:),5);
-            [cluster_vector, centroids, nit] = kmeans(standarized_data,klist(i),niters,max(klist),rand_seed, performance_it);
+            [cluster_vector, centroids, nit] = kmeansv(standarized_data,klist(i),niters,max(klist),rand_seed, performance_it);
             if plot_graph
                 plot_name = strcat(save_file_path,'confusion-graph k-',num2str(klist(i)),'-attempt-',num2str(attempt_count));
                 plot_k_means(klist(i),cluster_vector,categories,true,plot_name);
