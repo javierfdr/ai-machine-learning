@@ -85,7 +85,7 @@ function [] = pfcm_plotter(standarized_data,categories,klist,niters,nattempts, p
         attempts_sil_mean_list = [attempts_sil_mean_list;sil_mean_list];
     end
     
-    figure('name','Adjusted Rand Index for several k-means','visible',is_visible);    
+    h=figure('name','Adjusted Rand Index for several k-means','visible',is_visible);    
     for attempt_count=1:nattempts
         symbol_list = ['b-';'r-';'c-';'m-';'y-';'k-';'g-'];
         plot(klist, attempts_adjusted_i_list(attempt_count,:),symbol_list(mod(attempt_count,7),1),klist, attempts_adjusted_i_list(attempt_count,:),'ro','MarkerSize',8,'LineWidth',1,'MarkerFaceColor',[0.8,0.8,0.8]);hold on;
