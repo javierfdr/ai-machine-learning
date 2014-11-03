@@ -4,7 +4,7 @@
 
 function [std_data_matrix, parsed_data] = prepare_penbased_kmeans(file)
     pf = arffparser('read',file);
-    data_struct = pf;
+    data_struct = pf
     %% preparing attributes
     a1 = pf.a1.values()';
     a2 = pf.a2.values()';

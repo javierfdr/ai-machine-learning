@@ -106,7 +106,7 @@ function [] = pfcm_plotter(standarized_data,categories,klist,niters,nattempts, p
     xlabel('Value of K. Each line color is an attempt');
     ylabel('Silhouette mean');
     
-    plot_name = strcat(save_file_path,'adjusted-rand-index',num2str(attempt_count));
+    plot_name = strcat(save_file_path,'silhouette-mean-index',num2str(attempt_count));
     saveas(h,plot_name,'png');
 
 end

@@ -1,7 +1,7 @@
 function [] = plot_penbased_pca_data(file)
     
     [standarized_data, data_struct] = prepare_penbased(file);
-    categories = data_struct.class.values()';
+    categories = data_struct.a17.values()';
 
     %%Creating help hashes for plotting
     % create a hash for assigning a number to a category
