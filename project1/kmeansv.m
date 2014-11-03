@@ -16,7 +16,7 @@
 % assigned to each example ni and the distance to the centroid.
 % 'centroids' the final centroids converged. 
 % 'niters' number of iterations reached until kmeans converged
-function [cluster_vector, centroids, num_iters_kmean] = kmeans(data,k, max_iters, k_seed_num, seed, performance_it)
+function [cluster_vector, centroids, num_iters_kmean] = kmeansv(data,k, max_iters, k_seed_num, seed, performance_it)
     disp(strcat('Running k-means with values k:',num2str(k),' max_iters:',num2str(max_iters),' performance_iters: ',num2str(performance_it)));
     best_clus_vector = [];
     best_centroids = [];
