@@ -10,18 +10,13 @@ function [cluster_vector, f_cluster_vector, centroids, niters, err] = fcmv(data,
     f_cluster_vector = zeros(n_samples,c);
     prev_centroids = ones(c,size(data,2))*realmax;
     cent_dist = realmax;
+    m21 = 2/(m-1);
     while (cent_dist > epsilon) && (niters > 0)
-                    
-        for n = 1:n_samples
-            for i = 1:c
-                dist_x_centi = pdist([data(n,:);centroids(i,:)],'euclidean');
-                dist_x = 0;
-                for j = 1:c
-                    dist_x_centj = pdist([data(n,:);centroids(j,:)],'euclidean');
-                    dist_x = dist_x + ((dist_x_centi/dist_x_centj)^(2/(m-1)));
-                end
-                f_cluster_vector(n,i) = 1 / dist_x;
-            end
+        
+        dist_matrix = pdist2(data,centroids);
+        for i = 1:c
+            dist_matrix_i = repmat(dist_matrix(:,i),1,c);
+            f_cluster_vector(:,i) = 1 ./ sum((dist_matrix_i ./ dist_matrix).^m21, 2);
         end
         
         prev_centroids = centroids;

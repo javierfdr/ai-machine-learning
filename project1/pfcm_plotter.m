@@ -34,7 +34,7 @@ function [] = pfcm_plotter(standarized_data,categories,klist,niters,nattempts, p
         
         for i=1:size(klist,1)  
             %[cluster_vector, centroids, niters] = kmeans(standarized_data,klist(i),niters,k_seeds(1:klist(i),:),5);
-            [cluster_vector, fcv, pcvm centroids, nit, err] = pfcm(standarized_data, klist(i), niters, fm, fn, fa, fb, epsilon, round_results);
+            [cluster_vector, fcv, pcvm centroids, nit, err] = pfcmv(standarized_data, klist(i), niters, fm, fn, fa, fb, epsilon, round_results);
             if plot_graph
                 plot_name = strcat(save_file_path,'confusion-graph c-',num2str(klist(i)),'-attempt-',num2str(attempt_count));
                 plot_k_means(klist(i),cluster_vector,categories,true,plot_name);

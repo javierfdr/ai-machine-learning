@@ -17,38 +17,25 @@ function [cluster_vector, f_cluster_vector, p_cluster_vector, centroids, niters,
     n11 = 1 / (fn - 1);
     
     % Estimating Gamma for PFCM with FCM
-    [cv_fcm, fcv_fcm, cent_fcm, it_fcm, err_fcm] = fcm(data,c,niters,fm,epsilon, false);
+    [cv_fcm, fcv_fcm, cent_fcm, it_fcm, err_fcm] = fcmv(data,c,niters,fm,epsilon, false);
+    dist_matrix_fcm = pdist2(data,cent_fcm);
     for i = 1:c
-        dist_x_cent = 0;
-        for n = 1:n_samples
-            dist_x_cent(n) = pdist([data(n,:);cent_fcm(i,:)],'euclidean');                
-        end
         K = 1; % common choice
         gi_vector = (fcv_fcm(:,i).^fn)';
-        g(i) = K*(gi_vector*(dist_x_cent'.^2)) / sum(gi_vector);
-            
+        g(i) = K*(gi_vector*(dist_matrix_fcm(:,i).^2)) / sum(gi_vector);
         bg(i) = fb/g(i);
     end   
     
     while (cent_dist > epsilon) && (niters > 0)
                     
-        for n = 1:n_samples
-            for i = 1:c
-                dist_x_centi = pdist([data(n,:);centroids(i,:)],'euclidean');
-                dist_x = 0;
-                for j = 1:c
-                    dist_x_centj = pdist([data(n,:);centroids(j,:)],'euclidean');
-                    dist_x = dist_x + ((dist_x_centi/dist_x_centj)^m21);
-                end
-                f_cluster_vector(n,i) = 1 / dist_x;
-            end
+        dist_matrix = pdist2(data,centroids);
+        for i = 1:c
+            dist_matrix_i = repmat(dist_matrix(:,i),1,c);
+            f_cluster_vector(:,i) = 1 ./ sum((dist_matrix_i ./ dist_matrix).^m21, 2);
         end
         
         for i = 1:c
-            for n = 1:n_samples
-                dist_x_centi = pdist([data(n,:);centroids(i,:)],'euclidean');
-                p_cluster_vector(n,i) = 1 / (1 + ((bg(i)*(dist_x_centi^2))^n11));
-            end
+            p_cluster_vector(:,i) = 1 ./ (1 + ((bg(i).*(dist_matrix(:,i).^2)).^n11));
         end        
         
         prev_centroids = centroids;
