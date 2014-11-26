@@ -1,0 +1,15 @@
+@relation total_multi_test
+@attribute t1pts real
+@attribute t1results real
+@attribute t1pos real
+@attribute t1gf real
+@attribute t1ga real
+@attribute t1home real
+@attribute t2pts real
+@attribute t2results real
+@attribute t2pos real
+@attribute t2gf real
+@attribute t2ga real
+@attribute t2away real
+@attribute result {winhome,draw,winaway}
+@data
