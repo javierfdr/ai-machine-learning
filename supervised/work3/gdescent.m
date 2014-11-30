@@ -5,33 +5,30 @@
 % successive iteration. 
 % 'doplot' is a boolean value indicating if a continuous approximation plot
 % should be performed to visually observe the process
-function [w, conv_matrix] = gdescent(x,y,learning_rate,threshold,num_iterations, doplot, modified)
+function [w, conv_matrix] = gdescent(x,y,learning_rate,cutting_threshold,num_iterations, doplot, modified)
     min_error = realmax;
     original_x = x;
     o = ones(size(x,1),1);
     x = [o,x];
     x = x';   
-    w = [];
-    for i=1:size(x,1)
-        w = [w;1];
-    end
+    
+    %w = ones(size(x,1),1);
+    w = rand(size(x,1),1)/10;
     n = 1/size(x,2);
     n2 = n/2;
     count = 0;
-    %previous_error = realmax;
+    previous_error = 0;
     error = realmax;
     min_error = realmax;
     min_iterations =0;
    
     conv_matrix = [];
-    h = plot([0],[0]);
-        
-    % for plotting
-    %h = plot(x,y,'g-');
-    % count==0 just simulates a do-while
-    while num_iterations >0
+    h = plot([0],[0]);       
+    
+    % count==0 to simulate do-while
+    while num_iterations >0 & abs(previous_error-error)>cutting_threshold
         num_iterations = num_iterations-1;
-    %while((previous_error-min_error) > threshold || count==0)
+      
         % calculate gradient
         divided_x = n.*x;
         gradient_delta = divided_x*((x'*w)-y);
@@ -45,11 +42,11 @@ function [w, conv_matrix] = gdescent(x,y,learning_rate,threshold,num_iterations,
         end
         
         % calculate new minimum
-        %previous_error = min_error;
+        previous_error = error;
         error = (n2.*((x'*w)-y)')*((x'*w)-y);
         if error<min_error
             min_error = error;
-            min_iterations=count;       
+            min_iterations=count; 
         end
         
         count = count+1;
