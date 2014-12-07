@@ -2,7 +2,7 @@
 % Javier Fernandez (javierfdr@gmail.com)
 % Alejandro Hernandez (alejandro.ajhr@gmail.com)
 
-function nsamples = nsamplesvcdim(nfeatures,errtrain,confidence,deviation)
+function nsamples = nsamplesvcdim(nfeatures,confidence,deviation)
         
     function dVC = linvcdim(dim)
         dVC = dim + 1;
@@ -11,16 +11,13 @@ function nsamples = nsamplesvcdim(nfeatures,errtrain,confidence,deviation)
     delta = 1 - confidence;
     nsamples = 1;
        
-    upbound = errtrain + sqrt( (linvcdim( log(2*nsamples/linvcdim(nfeatures)))
-                           + log(2/delta)) / (2 * nsamples ));
+    upbound = sqrt((linvcdim(nfeatures)*(log(2*nsamples/linvcdim(nfeatures))+1) + log(2/delta)) / (2 * nsamples));
 
-    iter = 1000;
-    while iter > 0 && upbound - deviation > 0
+    iter = 1000000;
+    while iter > 0 &&  upbound - deviation > 0
         
-        nsamples = nsamples + (nsamples * (upbound - deviation)) + 1;
-        upbound = errtrain + sqrt( (linvcdim(
-                             log(2*nsamples/linvcdim(nfeatures))) 
-                             + log(2/delta)) / (2 * nsamples ));
+        nsamples = nsamples + 1;
+        upbound = sqrt((linvcdim(nfeatures)*(log(2*nsamples/linvcdim(nfeatures))+1) + log(2/delta)) / (2 * nsamples));
         iter = iter - 1;
     end
     

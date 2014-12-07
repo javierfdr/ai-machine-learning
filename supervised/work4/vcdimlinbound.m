@@ -12,7 +12,6 @@ function upbound = vcdimlinbound(Dtrain,errtrain,confidence)
     
     [nfeatures, nsamples] = size(Dtrain);
         
-    upbound = errtrain + sqrt( (linvcdim( log(2*nsamples/linvcdim(nfeatures)))
-                           + log(2/delta)) / (2 * nsamples ));
+    upbound = errtrain + sqrt( (linvcdim(nfeatures)*(log(2*nsamples/linvcdim(nfeatures))+1) + log(2/delta)) / (2 * nsamples ));
     
 end

@@ -73,7 +73,7 @@ ylabel('cost');
     for i = 1:size(confdevs,1)
         conf = confdevs(i,1);
         dev = confdevs(i,2);
-        boundsamples = nsamplesvcdim(size(D2train,1), 0.01,conf, dev);
+        boundsamples = nsamplesvcdim(size(D2train,1), conf, dev);
         disp(['confidence: ', num2str(conf), ' deviation: ', num2str(dev),' n.samples: ', num2str(boundsamples)]);
     end
 
