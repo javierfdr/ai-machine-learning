@@ -2,7 +2,7 @@
 % Javier Fernandez (javierfdr@gmail.com)
 % Alejandro Hernandez (alejandro.ajhr@gmail.com)
 
-function D = nans2mean(x, y=[], considerclasses=false)
+function D = nans2mean(x, y, considerclasses)
     
     D = x;
     D(isnan(x)) = 0;

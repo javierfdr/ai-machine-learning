@@ -9,15 +9,15 @@ function nsamples = nsamplesvcdim(nfeatures,confidence,deviation)
     end
     
     delta = 1 - confidence;
-    nsamples = 1;
+    nsamples = 2;
        
-    upbound = sqrt((linvcdim(nfeatures)*(log(2*nsamples/linvcdim(nfeatures))+1) + log(2/delta)) / (2 * nsamples));
+    upbound = sqrt(((linvcdim(nfeatures)*(log(2*nsamples/linvcdim(nfeatures))+1)) + log(2/delta)) / (2 * nsamples));
 
     iter = 1000000;
     while iter > 0 &&  upbound - deviation > 0
         
         nsamples = nsamples + 1;
-        upbound = sqrt((linvcdim(nfeatures)*(log(2*nsamples/linvcdim(nfeatures))+1) + log(2/delta)) / (2 * nsamples));
+        upbound = sqrt(((linvcdim(nfeatures)*(log(2*nsamples/linvcdim(nfeatures))+1)) + log(2/delta)) / (2 * nsamples));
         iter = iter - 1;
     end
     

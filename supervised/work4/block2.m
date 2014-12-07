@@ -5,7 +5,7 @@
 input('Block 2: Creating modified datasets... press enter');
 % 1) Create dataset D1, replacing the NaN values with the mean value of the
 % corresponding attribute without considering the missing values.
-D1 = nans2mean(x);
+D1 = nans2mean(x,[],false);
 input('Displaying values modified in D1 (difference with original x)... press enter ');
 Dtemp = x;
 Dtemp(isnan(x)) = 0;
@@ -23,8 +23,9 @@ disp(D2-Dtemp);
 % of the method used. Consider this new dataset as D3.
 D3 = x;
 D3(isnan(x)) = 0;
-D3(:,y==1) = D3(:,y==1) + conv2(D3(:,y==1), [1 0 1]/2, "same").*(isnan(x(:,y==1)));
-D3(:,y==-1) = D3(:,y==-1) + conv2(D3(:,y==-1), [1 0 1]/2, "same").*(isnan(x(:,y==-1)));
+
+D3(:,y==1) = D3(:,y==1) + conv2(D3(:,y==1), [1 0 1]/2, 'same').*(isnan(x(:,y==1)));
+D3(:,y==-1) = D3(:,y==-1) + conv2(D3(:,y==-1), [1 0 1]/2, 'same').*(isnan(x(:,y==-1)));
 input('Displaying values modified in D3 (difference with D2)... press enter ');
 disp(D3-D2);
 
