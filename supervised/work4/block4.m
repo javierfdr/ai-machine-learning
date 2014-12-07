@@ -30,7 +30,7 @@ ytest = y(splitpoint+1:size(D2,2));
 %d) Train your model on the training set.
 ws2t = alinealreg(D2train,ytrain);
 disp('Vector defining hyperplane for D2 holding out 1/5:');
-disp(ws2t);
+dispvarray(ws2t);
 
 % e) Answer the following questions: Which is the error rate on your
 % training data? Which is the error rate on your test data? Are they

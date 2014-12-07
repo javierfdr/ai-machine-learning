@@ -20,15 +20,15 @@ disp(['Dimensionality (nfeatures) of the training set: ',int2str(nfeatures)]);
 % 3) Mean of the training set, many options
 meanattrs = nanmean(x,2);
 disp('Mean of the attributes in the training set, discarding NaNs: ');
-disp(meanattrs);
+dispvarray(meanattrs);
 
 meanattrsp = nanmean(x(:,y==1),2);
 disp('Mean of the attributes in for class 1: ');
-disp(meanattrsp);
+dispvarray(meanattrsp);
 
 meanattrsn = nanmean(x(:,y==-1),2);
 disp('Mean of the attributes in for class -1: ');
-disp(meanattrsn);
+dispvarray(meanattrsn);
     
 disp(['Mean of the mean of the attributes ("Global Mean") in the training set: ',int2str(mean(meanattrs))]);
 

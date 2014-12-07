@@ -38,40 +38,40 @@ disp(D3-D2);
 input('Displaying new means for D1... press enter ');
 d1meanattrs = nanmean(D1,2);
 disp('Mean of the attributes in D1: ');
-disp(d1meanattrs);
+dispvarray(d1meanattrs);
 
 d1meanattrsp = nanmean(D1(:,y==1),2);
 disp('Mean of the attributes in for class 1 in D1:');
-disp(d1meanattrsp);
+dispvarray(d1meanattrsp);
 
 d1meanattrsn = nanmean(D1(:,y==-1),2);
 disp('Mean of the attributes in for class -1 in D1:');
-disp(d1meanattrsn);
+dispvarray(d1meanattrsn);
 
 
 input('Displaying new means for D2... press enter ');
 d2meanattrs = nanmean(D2,2);
 disp('Mean of the attributes in D2: ');
-disp(d2meanattrs);
+dispvarray(d2meanattrs);
 
 d2meanattrsp = nanmean(D2(:,y==1),2);
 disp('Mean of the attributes in for class 1 in D2:');
-disp(d2meanattrsp);
+dispvarray(d2meanattrsp);
 
 d2meanattrsn = nanmean(D2(:,y==-1),2);
 disp('Mean of the attributes in for class -1 in D2:');
-disp(d2meanattrsn);
+dispvarray(d2meanattrsn);
 
 input('Displaying new means for D3... press enter ');
 d3meanattrs = nanmean(D3,2);
 disp('Mean of the attributes in D3: ');
-disp(d3meanattrs);
+dispvarray(d3meanattrs);
 
 d3meanattrsp = nanmean(D3(:,y==1),2);
 disp('Mean of the attributes in for class 1 in D3:');
-disp(d3meanattrsp);
+dispvarray(d3meanattrsp);
 
 d3meanattrsn = nanmean(D3(:,y==-1),2);
 disp('Mean of the attributes in for class -1 in D3:');
-disp(d3meanattrsn);
+dispvarray(d3meanattrsn);
 

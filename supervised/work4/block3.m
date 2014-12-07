@@ -9,19 +9,19 @@ input('Block 3: Training linear threshold regressor... press enter');
 
 ws1 = alinealreg(D1,y);
 disp('Vector defining hyperplane for D1 (Analitically Derived):');
-disp(ws1);
+dispvarray(ws1);
 
 ws2 = alinealreg(D2,y);
 disp('Vector defining hyperplane for D2 (Analitically Derived):');
-disp(ws2);
+dispvarray(ws2);
 
 ws3 = alinealreg(D3,y);
 disp('Vector defining hyperplane for D3 (Analitically Derived):');
-disp(ws3);
+dispvarray(ws3);
 
 [wsgd , conv_m] = gdescent(D2,y,1e-5,1e-6,10000,false);
 disp('Vector defining hyperplane for D1 (Gradient Descent):');
-disp(wsgd);
+dispvarray(wsgd);
 
 
 % 3) Compute the error rates achieved on the training data

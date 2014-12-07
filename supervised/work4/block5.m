@@ -30,7 +30,7 @@ D2train = nans2mean(xtrain,ytrain,true);
 % d) Train your model on the training set.
 ws2t = alinealreg(D2train,ytrain);
 disp('Vector defining hyperplane for D2 holding out 1/5:');
-disp(ws2t);
+dispvarray(ws2t);
 
 % e) Replace the NaN values using the means computed on the training data %training or test???
 meanattrspt = nanmean(xtrain(:,ytrain==1),2);    
