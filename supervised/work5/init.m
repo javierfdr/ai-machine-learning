@@ -4,4 +4,4 @@
 
 %% This script initializes the workspace for the project
 
-addpath('./TFOCS-1.3.1/');
+addpath('./cvx/');
