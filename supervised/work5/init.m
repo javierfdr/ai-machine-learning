@@ -4,4 +4,6 @@
 
 %% This script initializes the workspace for the project
 
-addpath('./cvx/');
+cd ./cvx
+cvx_setup
+cd ..
