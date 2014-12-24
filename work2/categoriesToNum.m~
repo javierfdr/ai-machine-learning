@@ -1,0 +1,7 @@
+function [NumCategories] = categoriesToNum(Categories)
+    unique_cat = unique(Categories);
+    num_cat= size(unique(Categories));
+    
+    for i=1:size(categories)
+        
+end
