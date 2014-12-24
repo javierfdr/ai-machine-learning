@@ -1,0 +1,49 @@
+#-----------------------------------------------------------------------------
+#
+# ALE Configuration file
+#
+#-----------------------------------------------------------------------------
+
+###
+### Problem Description
+###
+
+NumAttributes = 35
+NumClasses    = 19
+
+###
+### Agent's information
+###
+
+AgentInitAttributes = 3
+Prune               = true
+TestMode            = Best
+Distance            = Mixed
+Agent               = DT
+AgentMaxInitWidth   = 6
+AgentMaxInitDepth   = 6
+
+###
+### ALE execution parameter
+###
+
+# General values
+WorldIterations = 5
+
+# Board Mapping
+MaxX            = 32
+MaxY            = 32
+#MappingStrategy = Pyramidal
+MappingStrategy = Uniform
+
+# Initializations
+Seed              = 69
+SeedRuns          = 69
+InitialAggregates = 0.8
+
+# Pameters
+MergeP           =  0.4
+SomaticMutationP =  0.01
+kThreshold       = -0.25
+MaxSplitP        =  0.5
+

@@ -1,0 +1,123 @@
+%
+% GALE automatic stratified fold generation for CV
+%
+% Generated at        : Fri Jun 15 15:51:10 GMT 2001
+% Random seed         : 69
+% File name           : GALE.zoo.cv.seed.69.fold.000002.train.arff
+% Number of instances : 92
+%
+
+@RELATION zoo
+
+@ATTRIBUTE	animal	{aardvark,antelope,bass,bear,boar,buffalo,calf,carp,catfish,cavy,cheetah,chicken,chub,clam,crab,crayfish,crow,deer,dogfish,dolphin,dove,duck,elephant,flamingo,flea,frog,fruitbat,giraffe,girl,gnat,goat,gorilla,gull,haddock,hamster,hare,hawk,herring,honeybee,housefly,kiwi,ladybird,lark,leopard,lion,lobster,lynx,mink,mole,mongoose,moth,newt,octopus,opossum,oryx,ostrich,parakeet,penguin,pheasant,pike,piranha,pitviper,platypus,polecat,pony,porpoise,puma,pussycat,raccoon,reindeer,rhea,scorpion,seahorse,seal,sealion,seasnake,seawasp,skimmer,skua,slowworm,slug,sole,sparrow,squirrel,starfish,stingray,swan,termite,toad,tortoise,tuatara,tuna,vampire,vole,vulture,wallaby,wasp,wolf,worm,wren}
+@ATTRIBUTE	hair	{false,true}
+@ATTRIBUTE	feathers	{false,true}
+@ATTRIBUTE	eggs	{false,true}
+@ATTRIBUTE	milk	{false,true}
+@ATTRIBUTE	airborne	{false,true}
+@ATTRIBUTE	aquatic	{false,true}
+@ATTRIBUTE	predator	{false,true}
+@ATTRIBUTE	toothed	{false,true}
+@ATTRIBUTE	backbone	{false,true}
+@ATTRIBUTE	breathes	{false,true}
+@ATTRIBUTE	venomous	{false,true}
+@ATTRIBUTE	fins	{false,true}
+@ATTRIBUTE	legs	INTEGER [0,9]
+@ATTRIBUTE	tail	{false,true}
+@ATTRIBUTE	domestic	{false,true}
+@ATTRIBUTE	catsize	{false,true}
+@ATTRIBUTE	type	{mammal,bird,reptile,fish,amphibian,insect,invertebrate}
+
+@DATA
+worm,false,false,true,false,false,false,false,false,false,true,false,false,0,false,false,false,invertebrate
+dogfish,false,false,true,false,false,true,true,true,true,false,false,true,0,true,false,true,fish
+crab,false,false,true,false,false,true,true,false,false,false,false,false,4,false,false,false,invertebrate
+deer,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,true,mammal
+lynx,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+slug,false,false,true,false,false,false,false,false,false,true,false,false,0,false,false,false,invertebrate
+vole,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,false,mammal
+polecat,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+skimmer,false,true,true,false,true,true,true,false,true,true,false,false,2,true,false,false,bird
+starfish,false,false,true,false,false,true,true,false,false,false,false,false,5,false,false,false,invertebrate
+pheasant,false,true,true,false,true,false,false,false,true,true,false,false,2,true,false,false,bird
+mole,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,false,mammal
+sole,false,false,true,false,false,true,false,true,true,false,false,true,0,true,false,false,fish
+flea,false,false,true,false,false,false,false,false,false,true,false,false,6,false,false,false,insect
+calf,true,false,false,true,false,false,false,true,true,true,false,false,4,true,true,true,mammal
+sealion,true,false,false,true,false,true,true,true,true,true,false,true,2,true,false,true,mammal
+goat,true,false,false,true,false,false,false,true,true,true,false,false,4,true,true,true,mammal
+giraffe,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,true,mammal
+flamingo,false,true,true,false,true,false,false,false,true,true,false,false,2,true,false,true,bird
+pike,false,false,true,false,false,true,true,true,true,false,false,true,0,true,false,true,fish
+lobster,false,false,true,false,false,true,true,false,false,false,false,false,6,false,false,false,invertebrate
+aardvark,true,false,false,true,false,false,true,true,true,true,false,false,4,false,false,true,mammal
+lion,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+puma,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+wasp,true,false,true,false,true,false,false,false,false,true,true,false,6,false,false,false,insect
+pony,true,false,false,true,false,false,false,true,true,true,false,false,4,true,true,true,mammal
+termite,false,false,true,false,false,false,false,false,false,true,false,false,6,false,false,false,insect
+hawk,false,true,true,false,true,false,true,false,true,true,false,false,2,true,false,false,bird
+sparrow,false,true,true,false,true,false,false,false,true,true,false,false,2,true,false,false,bird
+wolf,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+wren,false,true,true,false,true,false,false,false,true,true,false,false,2,true,false,false,bird
+scorpion,false,false,false,false,false,false,true,false,false,true,true,false,8,true,false,false,invertebrate
+swan,false,true,true,false,true,true,false,false,true,true,false,false,2,true,false,true,bird
+parakeet,false,true,true,false,true,false,false,false,true,true,false,false,2,true,true,false,bird
+newt,false,false,true,false,false,true,true,true,true,true,false,false,4,true,false,false,amphibian
+gnat,false,false,true,false,true,false,false,false,false,true,false,false,6,false,false,false,insect
+leopard,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+elephant,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,true,mammal
+chicken,false,true,true,false,true,false,false,false,true,true,false,false,2,true,true,false,bird
+crayfish,false,false,true,false,false,true,true,false,false,false,false,false,6,false,false,false,invertebrate
+bass,false,false,true,false,false,true,true,true,true,false,false,true,0,true,false,false,fish
+boar,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+mongoose,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+seawasp,false,false,true,false,false,true,true,false,false,false,true,false,0,false,false,false,invertebrate
+platypus,true,false,true,true,false,true,true,false,true,true,false,false,4,true,false,true,mammal
+carp,false,false,true,false,false,true,false,true,true,false,false,true,0,true,true,false,fish
+pussycat,true,false,false,true,false,false,true,true,true,true,false,false,4,true,true,true,mammal
+skua,false,true,true,false,true,true,true,false,true,true,false,false,2,true,false,false,bird
+catfish,false,false,true,false,false,true,true,true,true,false,false,true,0,true,false,false,fish
+raccoon,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,true,mammal
+cavy,true,false,false,true,false,false,false,true,true,true,false,false,4,false,true,false,mammal
+seahorse,false,false,true,false,false,true,false,true,true,false,false,true,0,true,false,false,fish
+slowworm,false,false,true,false,false,false,true,true,true,true,false,false,0,true,false,false,reptile
+haddock,false,false,true,false,false,true,false,true,true,false,false,true,0,true,false,false,fish
+opossum,true,false,false,true,false,false,true,true,true,true,false,false,4,true,false,false,mammal
+buffalo,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,true,mammal
+antelope,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,true,mammal
+honeybee,true,false,true,false,true,false,false,false,false,true,true,false,6,false,true,false,insect
+seasnake,false,false,false,false,false,true,true,true,true,false,true,false,0,true,false,false,reptile
+crow,false,true,true,false,true,false,true,false,true,true,false,false,2,true,false,false,bird
+lark,false,true,true,false,true,false,false,false,true,true,false,false,2,true,false,false,bird
+dove,false,true,true,false,true,false,false,false,true,true,false,false,2,true,true,false,bird
+bear,true,false,false,true,false,false,true,true,true,true,false,false,4,false,false,true,mammal
+duck,false,true,true,false,true,true,false,false,true,true,false,false,2,true,false,false,bird
+toad,false,false,true,false,false,true,false,true,true,true,false,false,4,false,false,false,amphibian
+kiwi,false,true,true,false,false,false,true,false,true,true,false,false,2,true,false,false,bird
+octopus,false,false,true,false,false,true,true,false,false,false,false,false,8,false,false,true,invertebrate
+seal,true,false,false,true,false,true,true,true,true,true,false,true,0,false,false,true,mammal
+frog,false,false,true,false,false,true,true,true,true,true,true,false,4,false,false,false,amphibian
+reindeer,true,false,false,true,false,false,false,true,true,true,false,false,4,true,true,true,mammal
+vampire,true,false,false,true,true,false,false,true,true,true,false,false,2,true,false,false,mammal
+stingray,false,false,true,false,false,true,true,true,true,false,true,true,0,true,false,true,fish
+tortoise,false,false,true,false,false,false,false,false,true,true,false,false,4,true,false,true,reptile
+hare,true,false,false,true,false,false,false,true,true,true,false,false,4,true,false,false,mammal
+chub,false,false,true,false,false,true,true,true,true,false,false,true,0,true,false,false,fish
+penguin,false,true,true,false,false,true,true,false,true,true,false,false,2,true,false,true,bird
+ladybird,false,false,true,false,true,false,true,false,false,true,false,false,6,false,false,false,insect
+tuatara,false,false,true,false,false,false,true,true,true,true,false,false,4,true,false,false,reptile
+dolphin,false,false,false,true,false,true,true,true,true,true,false,true,0,true,false,true,mammal
+hamster,true,false,false,true,false,false,false,true,true,true,false,false,4,true,true,false,mammal
+frog,false,false,true,false,false,true,true,true,true,true,false,false,4,false,false,false,amphibian
+squirrel,true,false,false,true,false,false,false,true,true,true,false,false,2,true,false,false,mammal
+clam,false,false,true,false,false,false,true,false,false,false,false,false,0,false,false,false,invertebrate
+rhea,false,true,true,false,false,false,true,false,true,true,false,false,2,true,false,true,bird
+fruitbat,true,false,false,true,true,false,false,true,true,true,false,false,2,true,false,false,mammal
+gorilla,true,false,false,true,false,false,false,true,true,true,false,false,2,false,false,true,mammal
+pitviper,false,false,true,false,false,false,true,true,true,true,true,false,0,true,false,false,reptile
+vulture,false,true,true,false,true,false,true,false,true,true,false,false,2,true,false,true,bird
+ostrich,false,true,true,false,false,false,false,false,true,true,false,false,2,true,false,true,bird
+wallaby,true,false,false,true,false,false,false,true,true,true,false,false,2,true,false,true,mammal
+mink,true,false,false,true,false,true,true,true,true,true,false,false,4,true,false,true,mammal
+herring,false,false,true,false,false,true,true,true,true,false,false,true,0,true,false,false,fish
