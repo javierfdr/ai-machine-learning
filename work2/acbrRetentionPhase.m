@@ -20,7 +20,7 @@ function [STDData, Categories] = acbrRetentionPhase(STDData, KNN,D, Categories, 
  
         if (dd>= Threshold)
             STDData = [STDData;Instance];
-            Categories = [Categories;numToCategory(majority_class,Categories)]
+            Categories = [Categories;numToCategory(majority_class,Categories)];
         end
         
         value = dd;
