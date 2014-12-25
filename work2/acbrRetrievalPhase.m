@@ -1,3 +1,6 @@
+% Introduction to Machine Learning (IML) - Work 2
+% Javier Fernandez (javierfdr@gmail.com)
+% Alejandro Hernandez (alejandro.ajhr@gmail.com)
 
 % Retrieves the most similar instance to the given instance value
 % looking in TrainingMatrix through a KNN algorithm with 'k' neighbors.
@@ -9,6 +12,9 @@ function [knn,d] = acbrRetrievalPhase(TrainData, Instance, K)
     %model = ClassificationKNN.fit(TrainData,Categories,'NumNeighbors',k);
     %class = model.predict(instance);
     
-    [knn,d] = knnsearch(TrainData,Instance,'K',K);
+    %[knn,d] = knnsearch(TrainData,Instance,'K',K);
+    kdTree = kd_buildtree(TrainData,false);
+        
+    [knn,d] = kd_knnsearch(kdTree,Instance,K);
     
 end
