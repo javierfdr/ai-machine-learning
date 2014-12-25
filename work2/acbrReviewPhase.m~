@@ -1,0 +1,22 @@
+function [Goodness] = acbrReviewPhase(STDData, Categories, KNN, D, Goodness, Class, alpha)
+    
+    % Finding the knn that got the right class
+    NumCategories = categoriesToNum(Categories);
+    knnClasses = NumCategories(KNN);
+    classNum = categorieToNum(Categories,Class);
+    knnCorrectClasses = knnClasses==classNum;
+    knnCorrectIndex = KNN(knnCorrectClasses);
+    knnCorrect = STDData(knnCorrectIndex);
+    
+    
+    % Computing the reward to correct neighbors
+    correctReward = zeros(size(STDData,1),1);
+    correctReward(knnCorrectIndex) = reward(knnCorrectIndex) + 1;
+    
+    % Update goodness for correct neighbors
+    Goodness(KNN) = Goodness(KNN) + alpha*abs(reward(KNN)-Goodness(KNN));
+
+    % Update goodness for incorrect neighbors
+    
+    
+end

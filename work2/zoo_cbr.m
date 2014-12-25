@@ -4,6 +4,7 @@ function [class] = zoo_cbr()
     
     k=3;
     instance = std(1,:);
-    class = cbr(std,categories,instance,k,'MostSimilar');
+    goodness = ones(size(std,1),1)*0.5;
+    class = cbr(std,categories,goodness, instance,k,'MostSimilar');
     
 end
