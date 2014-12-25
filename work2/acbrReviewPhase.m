@@ -1,3 +1,7 @@
+% Introduction to Machine Learning (IML) - Work 2
+% Javier Fernandez (javierfdr@gmail.com)
+% Alejandro Hernandez (alejandro.ajhr@gmail.com)
+
 function [Goodness] = acbrReviewPhase(STDData, Categories, KNN, D, Goodness, Class, alpha)
     
     % Finding the knn that got the right class

@@ -1,3 +1,7 @@
+% Introduction to Machine Learning (IML) - Work 2
+% Javier Fernandez (javierfdr@gmail.com)
+% Alejandro Hernandez (alejandro.ajhr@gmail.com)
+
 function [CatArray] = categoriesToNum(Categories)
     unique_cat = unique(Categories);
     num_cat= size(unique(Categories));
