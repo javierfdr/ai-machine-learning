@@ -130,8 +130,9 @@ end
 
 if (nargin==3)
 
-    IDX=best_points_mat(1:number_of_points,dim+1);
-    d=best_points_mat(1:number_of_points,dim+3);
+    best_points_mat=sortrows(best_points_mat,dim+1);
+    IDX=best_points_mat(1:number_of_points,dim+1)';
+    d=sqrt(best_points_mat(1:number_of_points,dim+3)');
 
     clear global best_points_mat;
     clear global number_of_points;
@@ -143,33 +144,36 @@ end
 
 function []=node_check(point,k,node_number)
 
-global best_points_mat
-global number_of_points
-global tree_cell
+    global best_points_mat
+    global number_of_points
+    global tree_cell
 
-dim =size(point,2);
-distance = sum((point-tree_cell(node_number).nodevector).^2);
+    dim =size(point,2);
+    distance = sum((point-tree_cell(node_number).nodevector).^2);
 
-for numindex = 1:size(tree_cell(node_number).index);
-    if (number_of_points==k && best_points_mat(k,dim+3)>distance)
-        best_points_mat(k,1:dim)=tree_cell(node_number).nodevector;
-        best_points_mat(k,dim+1)=tree_cell(node_number).index(numindex);
-        best_points_mat(k,dim+2)=node_number;
-        best_points_mat(k,dim+3)=distance;
-        best_points_mat=sortrows(best_points_mat,dim+3);
-
-    elseif(number_of_points<k)
-        number_of_points=number_of_points+1;
-        best_points_mat(number_of_points,1:dim)=tree_cell(node_number).nodevector;
-        best_points_mat(number_of_points,dim+1)=tree_cell(node_number).index(numindex);
-        best_points_mat(number_of_points,dim+2)=node_number;
-        best_points_mat(number_of_points,dim+3)=distance;
-        % once the variable gets filled up then sort the rows 
-        if(number_of_points==k)
+    for numindex = 1:size(tree_cell(node_number).index);
+        if (number_of_points==k && best_points_mat(k,dim+3)>distance)
+            best_points_mat(k,1:dim)=tree_cell(node_number).nodevector;
+            best_points_mat(k,dim+1)=tree_cell(node_number).index(numindex);
+            best_points_mat(k,dim+2)=node_number;
+            best_points_mat(k,dim+3)=distance;
             best_points_mat=sortrows(best_points_mat,dim+3);
-        end
 
+        elseif(number_of_points<k)
+            number_of_points=number_of_points+1;
+            best_points_mat(number_of_points,1:dim)=tree_cell(node_number).nodevector;
+            best_points_mat(number_of_points,dim+1)=tree_cell(node_number).index(numindex);
+            best_points_mat(number_of_points,dim+2)=node_number;
+            best_points_mat(number_of_points,dim+3)=distance;
+            % once the variable gets filled up then sort the rows 
+            if(number_of_points==k)
+                best_points_mat=sortrows(best_points_mat,dim+3);
+            end
+
+        end
     end
 end
 
 return;
+
+end
