@@ -4,7 +4,7 @@
 
 % Decides wether to retain or not the new instance. The new instance is
 % added in case the decision is to retain.
-function [STDData, Categories] = acbrRetentionPhase(STDData, KNN,D, Categories, Instance, InstanceClass, NewClass, Goodness, InitGoodness,  RetentionStrategy,Threshold)
+function [STDData, Categories,Goodness] = acbrRetentionPhase(STDData, KNN,D, Categories, Instance, InstanceClass, NewClass, Goodness, InitGoodness,  RetentionStrategy, Threshold)
     if isequal(RetentionStrategy(1:2),'DD')
         
         NumCategories = categoriesToNum(Categories);
@@ -31,12 +31,12 @@ function [STDData, Categories] = acbrRetentionPhase(STDData, KNN,D, Categories, 
         value = dd;
     elseif isequal(RetentionStrategy(1:2),'DE')
     
-        if(!isequal(NewClass,InstanceClass))
+        if(~isequal(NewClass,InstanceClass))
         
             NumCategories = categoriesToNum(Categories);
             majority_class = mode(NumCategories(KNN));
             
-            if(!isequal(NewClass, majority_class))
+            if(~isequal(NewClass, majority_class))
                 STDData = [STDData;Instance];
                 Categories = [Categories;numToCategory(InstanceClass,Categories)];
                 Goodness = [Goodness;InitGoodness];
@@ -44,16 +44,6 @@ function [STDData, Categories] = acbrRetentionPhase(STDData, KNN,D, Categories, 
             
         end
     
-    end
-    
-    % Oblivion
-    if (size(RetentionStrategy)>2 && isequal(RetentionStrategy(3:4),'-O'))
-        %Forgeting Instances
-        STDData = STDData(Goodness >= InitGoodness);
-        %Forgeting Classes
-        Categories = Categories(Goodness >= InitGoodness);
-        %Forgeting Goodness
-        Goodness = Goodness(Goodness >= InitGoodness);
     end
     
 end

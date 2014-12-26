@@ -18,7 +18,7 @@ function [STDData, Categories, Goodness, newClass] = cbrCombinator(STDData,Categ
     [instance,newClass] = acbrReusePhase(STDData, Categories, [knn',d',weights'], ReuseStrategy);
     
     if Review
-        [Goodness] = acbrReviewPhase(STDData, Categories, knn',d', Goodness, newClass,0.3);
+        [Goodness] = acbrReviewPhase(STDData, Categories, knn',d', Goodness, InitGoodness, 'DD', newClass,0.2);
     end
     
     if Retention

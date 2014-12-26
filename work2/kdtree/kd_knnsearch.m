@@ -144,9 +144,9 @@ end
 
 function []=node_check(point,k,node_number)
 
-    global best_points_mat
-    global number_of_points
-    global tree_cell
+    %global best_points_mat
+    %global number_of_points
+    %global tree_cell
 
     dim =size(point,2);
     distance = sum((point-tree_cell(node_number).nodevector).^2);

@@ -31,7 +31,7 @@ function [instance,class] = acbrReusePhase(TrainData, TrainClasses, KNND , Strat
                 end
             end
         end
-        [max, index] = max(votes);
+        [max_value, index] = max(votes);
         class = uniqueClasses(index);
         instance = TrainData(KNN(1));
         mindist = Distance(1);
@@ -44,5 +44,5 @@ function [instance,class] = acbrReusePhase(TrainData, TrainClasses, KNND , Strat
             end            
         end        
     end
-    
+  
 end
