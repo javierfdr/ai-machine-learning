@@ -33,16 +33,16 @@ function [IDX,d] = matKnnSearch(X,Y,K)
     dimX = size(X,2);
     numYs = size(Y,1);
     
-    distMatrix = pdist2(X,Y);%uncomment in matlab
-    %distMatrix = distEuc(X,Y);%comment in matlab
+    %distMatrix = pdist2(X,Y);%uncomment in matlab
+    distMatrix = distEuc(X,Y);%comment in matlab
     
-    X = [X,distMatrix];
     IDX = [];
     d = [];
     for i=1:numYs;
-        [X, index] = sortrows(X,dimX+i);
+        distVector = distMatrix(:,i);
+        [distVector, index] = sortrows(distVector);
         IDX = [IDX; index(1:K)' ];
-        d = [d; X(1:K,dimX+i)'];
+        d = [d; distVector(1:K)'];
     end
    
 end
