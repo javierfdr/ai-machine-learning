@@ -41,9 +41,8 @@ function [IDX,d] = matKnnSearch(X,Y,K)
     d = [];
     for i=1:numYs;
         [X, index] = sortrows(X,dimX+i);
-        idxAndD = sortrows([index(1:K), X(1:K,dimX+i)], 1);
-        IDX = [IDX; idxAndD(:,1)' ];
-        d = [d; idxAndD(:,2)'];
+        IDX = [IDX; index(1:K)' ];
+        d = [d; X(1:K,dimX+i)'];
     end
    
 end
