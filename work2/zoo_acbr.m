@@ -22,6 +22,10 @@ function [class] = zoo_acbr()
     
     FeatureSelection = 'RELIEF';
     FSThreshold = 0.25;
+    
+    % Stats array containing [accuracy,number_of_instances,data_size_variation]
+    Stats = zeros(1,3);
+    
     [NewSTDData, Weights, Features] = preprocessData(STDData, Categories, K,FeatureSelection ,FSThreshold);
-    [weightedSTDData, weightedCategories, weightedGoodness, weightedClass] = weightedACBRAlgorithm(NewSTDData,Categories,goodness,initGoodness, instance,instanceClass,K,'WeightedVoting',Weights, Features);
+    [newStats, weightedSTDData, weightedCategories, weightedGoodness, weightedClass] = weightedACBRAlgorithm(Stats,NewSTDData,Categories,goodness,initGoodness, instance,instanceClass,K,'WeightedVoting',Weights, Features);
 end

@@ -4,7 +4,7 @@
 
 % Performs a CBR to the given standarized data performing KNN on k
 % neighbors and using the provided ReuseStrategy for reuse of instances.
-function [STDData, Categories, Goodness, newClass] = cbrCombinator(STDData,Categories, Goodness, InitGoodness, Instance, InstanceClass, K, ReuseStrategy, Weighted, Weights, Features, Review, Retention)
+function [newStats, STDData, Categories, Goodness, newClass] = cbrCombinator(Stats,STDData,Categories, Goodness, InitGoodness, Instance, InstanceClass, K, ReuseStrategy, Weighted, Weights, Features, Review, Retention)
 
     if Weighted        
         
@@ -17,6 +17,10 @@ function [STDData, Categories, Goodness, newClass] = cbrCombinator(STDData,Categ
     
     % Reuse must be always called, at least with the MostSimilar strategy
     [instance,newClass] = acbrReusePhase(STDData, Categories, [knn',d'], votingWeights, ReuseStrategy);
+    
+    % revision phase
+    %[newStats] = revisionPhase(Stats,newClass,InstanceClass);
+    newStats = Stats;
     
     if Review
         [Goodness] = acbrReviewPhase(STDData, Categories, knn',d', Goodness, InitGoodness, 'DD', newClass,0.2);
