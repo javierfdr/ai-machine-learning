@@ -26,7 +26,7 @@ function [Goodness] = acbrReviewPhase(STDData, Categories, KNN, D, Goodness,  In
 
         
     % Oblivion
-    if ((size(RetentionStrategy)>2) & (isequal(RetentionStrategy(3:4),'-O')))
+    if ((size(RetentionStrategy)>2) && (isequal(RetentionStrategy(3:4),'-O')))
         %Forgeting Instances
         STDData = STDData(Goodness >= InitGoodness);
         %Forgeting Classes
