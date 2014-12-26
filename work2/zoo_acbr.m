@@ -10,7 +10,8 @@ function [class] = zoo_acbr()
     instance = std(1,:);
     instanceClass = categories(1);
     goodness = ones(size(std,1),1)*0.5;
-    class = acbrAlgorithm(std,categories,goodness, instance,instanceClass,k,'MostSimilar');
-    weighted_class = weightedACBRAlgorithm(std,categories,goodness, instance,instanceClass,k,'WeightedVoting');
+    initGoodness = 0.5;
+    class = acbrAlgorithm(std,categories,goodness,initGoodness, instance,instanceClass,k,'MostSimilar');
+    weighted_class = weightedACBRAlgorithm(std,categories,goodness,initGoodness, instance,instanceClass,k,'WeightedVoting');
     
 end

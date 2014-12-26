@@ -4,10 +4,10 @@
 
 % Performs a CBR to the given standarized data performing KNN on k
 % neighbors and using the provided ReuseStrategy for reuse of instances.
-function [STDData, Categories, Goodness, newClass] = weightedACBRAlgorithm(STDData,Categories, Goodness, Instance, InstanceClass, K, ReuseStrategy)
+function [STDData, Categories, Goodness, newClass] = weightedACBRAlgorithm(STDData,Categories, Goodness, InitGoodness,  Instance, InstanceClass, K, ReuseStrategy)
     [knn,d,weights] = weightedACBRRetrievalPhase(STDData,Instance,K);
     [instance,newClass] = acbrReusePhase(STDData, Categories, [knn',d',weights'], ReuseStrategy);
     [Goodness] = acbrReviewPhase(STDData, Categories, knn',d', Goodness, newClass,0.3);
-    [STDData,Categories] = acbrRetentionPhase(STDData, knn',d', Categories,Instance, InstanceClass, newClass, 'DD',0);
+    [STDData,Categories] = acbrRetentionPhase(STDData, knn',d', Categories,Instance, InstanceClass, newClass, Goodness, InitGoodness,  'DD',0);
 end
 
