@@ -4,7 +4,11 @@
 
 % Performs a CBR to the given standarized data performing KNN on k
 % neighbors and using the provided ReuseStrategy for reuse of instances.
-function [STDData, Categories, Goodness, newClass] = weightedACBRAlgorithm(STDData,Categories, Goodness, InitGoodness,  Instance, InstanceClass, K, ReuseStrategy)
-    [STDData, Categories, Goodness, newClass] = cbrCombinator(STDData,Categories, Goodness, InitGoodness,  Instance, InstanceClass, K, ReuseStrategy, true, true, true);
+function [STDData, Categories, Goodness, newClass] = weightedACBRAlgorithm(STDData,Categories, Goodness, InitGoodness,  Instance, InstanceClass, K, ReuseStrategy, Weights, Features)
+
+    Retention = true;
+    Review = true;
+    Weighted = true;
+    [STDData, Categories, Goodness, newClass] = cbrCombinator(STDData,Categories, Goodness, InitGoodness,  Instance, InstanceClass, K, ReuseStrategy, Weighted, Weights, Features, Review, Retention);
 end
 

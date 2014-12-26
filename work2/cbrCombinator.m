@@ -4,18 +4,19 @@
 
 % Performs a CBR to the given standarized data performing KNN on k
 % neighbors and using the provided ReuseStrategy for reuse of instances.
-function [STDData, Categories, Goodness, newClass] = cbrCombinator(STDData,Categories, Goodness, InitGoodness, Instance, InstanceClass, K, ReuseStrategy, Weighted, Review, Retention)
+function [STDData, Categories, Goodness, newClass] = cbrCombinator(STDData,Categories, Goodness, InitGoodness, Instance, InstanceClass, K, ReuseStrategy, Weighted, Weights, Features, Review, Retention)
 
     if Weighted        
-        [knn,d,weights] = weightedACBRRetrievalPhase(STDData,Instance,K);
+        
+        [knn,d,votingWeights,newInstance] = weightedACBRRetrievalPhase(STDData,Instance,K,Weights,Features);
+        Instance = newInstance;
     else
-        [knn,d] = acbrRetrievalPhase(STDData,Instance,K);
+        [knn,d,votingWeights] = acbrRetrievalPhase(STDData,Instance,K);
         % this mimics the weights allowing for normal voting
-        weights = ones(1,size(knn,2));
     end
     
     % Reuse must be always called, at least with the MostSimilar strategy
-    [instance,newClass] = acbrReusePhase(STDData, Categories, [knn',d',weights'], ReuseStrategy);
+    [instance,newClass] = acbrReusePhase(STDData, Categories, [knn',d'], votingWeights, ReuseStrategy);
     
     if Review
         [Goodness] = acbrReviewPhase(STDData, Categories, knn',d', Goodness, InitGoodness, 'DD', newClass,0.2);

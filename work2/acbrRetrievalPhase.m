@@ -8,6 +8,8 @@
 % a vector where containing the label or class for each of TrainMatrix example.
 function [knn,d] = acbrRetrievalPhase(TrainData, Instance, K)
     
-    [knn, d, weights] = weightedACBRRetrievalPhase(TrainData, Instance, K);
+    oneWeights = ones(size(TrainData,2),2);
+    Features = [1:size(TrainData,2)];
+    [knn, d, weights] = weightedACBRRetrievalPhase(TrainData, Instance, K,ones(),oneWeights,Features);
     
 end
