@@ -33,8 +33,8 @@ function [IDX,d] = matKnnSearch(X,Y,K)
     dimX = size(X,2);
     numYs = size(Y,1);
     
-    %distMatrix = pdist2(data,centroids);%uncomment in matlab
-    distMatrix = distEuc(X,Y);%comment in matlab
+    distMatrix = pdist2(X,Y);%uncomment in matlab
+    %distMatrix = distEuc(X,Y);%comment in matlab
     
     X = [X,distMatrix];
     IDX = [];
