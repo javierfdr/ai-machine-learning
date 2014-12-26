@@ -49,11 +49,11 @@ function [STDData, Categories] = acbrRetentionPhase(STDData, KNN,D, Categories, 
     % Oblivion
     if (size(RetentionStrategy)>2 && isequal(RetentionStrategy(3:4),'-O'))
         %Forgeting Instances
-        STDData = STDData(Goodness < InitGoodness);
+        STDData = STDData(Goodness >= InitGoodness);
         %Forgeting Classes
-        Categories = Categories(Goodness < InitGoodness);
+        Categories = Categories(Goodness >= InitGoodness);
         %Forgeting Goodness
-        Goodness = Goodness(Goodness < InitGoodness);
+        Goodness = Goodness(Goodness >= InitGoodness);
     end
     
 end
