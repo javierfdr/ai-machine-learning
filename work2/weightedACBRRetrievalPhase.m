@@ -15,10 +15,10 @@ function [knn,d,votingWeights,newInstance] = weightedACBRRetrievalPhase(TrainDat
     %[knn,d] = kd_knnsearch(kdTree,Instance,K)
  
         %knn matrix optimized
-        newInstance = Instance(:,Features);
-        newInstance = newInstance.*Weights;
+%        newInstance = Instance(:,Features);
+        newInstance = Instance.*Weights;
         
-        [knn,d] = matKnnSearch(TrainData,newInstance,K);
+        [knn,d] = matKnnSearch(TrainData,Instance,K);
 
         %checking results
         %if knn ~= matlab_knn
@@ -27,6 +27,6 @@ function [knn,d,votingWeights,newInstance] = weightedACBRRetrievalPhase(TrainDat
         %end
 
         % Weighting results with its euclidean distance
-        votingWeights = 1 ./ (d + 1);
-
+        %votingWeights = 1 ./ (((d)./(mean(d)+1)) + 1);
+        votingWeights = ones(1,size(d,2));
 end

@@ -31,19 +31,58 @@ function [STDData, Categories,Goodness] = acbrRetentionPhase(STDData, KNN,D, Cat
         value = dd;
     elseif isequal(RetentionStrategy(1:2),'DE')
     
-        if(~isequal(NewClass,InstanceClass))
+        numInstanceClass = categorieToNum(Categories,InstanceClass);
+                 
+        if(~isequal(NewClass,numInstanceClass))
         
             NumCategories = categoriesToNum(Categories);
             majority_class = mode(NumCategories(KNN));
             
             if(~isequal(NewClass, majority_class))
                 STDData = [STDData;Instance];
-                Categories = [Categories;numToCategory(InstanceClass,Categories)];
+                Categories = [Categories;InstanceClass];
                 Goodness = [Goodness;InitGoodness];
             end
             
         end
-    
+        
+    elseif isequal(RetentionStrategy(1:2),'AR')
+            STDData = [STDData;Instance];
+            Categories = [Categories;InstanceClass];
+            Goodness = [Goodness;InitGoodness]; 
     end
+    
+    % if NR is passed do nothing
+    
+    % Oblivion
+    if ((size(RetentionStrategy,2)>2) && (isequal(RetentionStrategy(3:4),'-O')))
+        %oblived = Goodness < InitGoodness;
+        %oblivedIndex = find(oblived);
+        
+        %Forgeting Instances
+        STDData = STDData(Goodness >= InitGoodness,:);
+        %Forgeting Classes
+        Categories = Categories(Goodness >= InitGoodness,:);
+        %Forgeting Goodness
+        Goodness = Goodness(Goodness >= InitGoodness,:);
+        
+        %newKNN = [];
+        %newD = [];
+        
+        %oblivedIndex = oblivedIndex(ismember(oblivedIndex,KNN)==1);
+        
+        %for nk=1:size(KNN)
+        %    oblive = false;
+        %    for o=1:size(oblivedIndex)
+        %        if oblivedIndex(o)==KNN(nk)
+        %            oblive = true;
+        %        end
+        %    end
+        %    if ~oblive
+        %        newKNN = [newKNN,KNN(nk)];
+        %        newD = [newD,D(nk)];
+        %    end
+        %end
+    end    
     
 end

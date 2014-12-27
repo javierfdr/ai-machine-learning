@@ -3,6 +3,11 @@
 % Alejandro Hernandez (alejandro.ajhr@gmail.com)
 
 function [ClassNum] = categorieToNum(Categories,Class)
+    if isnumeric(Class)
+        ClassNum = Class;
+        return;
+    end
+
     unique_cat = unique(Categories);
     
     class_match = strcmp(unique_cat,Class);

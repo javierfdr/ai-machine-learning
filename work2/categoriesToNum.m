@@ -3,6 +3,11 @@
 % Alejandro Hernandez (alejandro.ajhr@gmail.com)
 
 function [CatArray] = categoriesToNum(Categories)
+    if isnumeric(Categories)
+         CatArray = Categories;
+         return;
+    end
+
     unique_cat = unique(Categories);
     num_cat= size(unique(Categories));
 
