@@ -38,6 +38,4 @@ x = linspace(-1,1,100);
 y = (-1-(a(1)*x)-b)/a(2); % margin line == 1
 plot(x,y,'g--'); hold on;
 
-
-
-
+input('Press enter to proceed to next section...');
