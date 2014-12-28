@@ -1,6 +1,0 @@
-
-% Performs a CBR to the given standarized data performing KNN on k
-% neighbors and using the provided ReuseStrategy for reuse of instances.
-function [class] = cbr(STDData, k, ReuseStrategy)
-    knnd = acbrRetrievalPhase(STDData,,std(1,:),k);
-end
