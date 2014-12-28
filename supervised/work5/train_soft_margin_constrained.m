@@ -1,4 +1,4 @@
-function [a,b,sv] = train_soft_margin_constrained(data, labels, lambda)
+function [a,b,sv,u] = train_soft_margin_constrained(data, labels, lambda)
 
     % Optimizing the margin by QP solving
     cvx_begin
@@ -12,9 +12,6 @@ function [a,b,sv] = train_soft_margin_constrained(data, labels, lambda)
              
     cvx_end
     
-    disp('U value');
-    disp(u);
-
    %calculating support vectors
     dist = (a'*data')+b(1);
     dist1 = dist(labels==-1);

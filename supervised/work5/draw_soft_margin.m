@@ -1,5 +1,5 @@
-function [] = draw_soft_margin(data,labels,a,b,sv)
-    figure('name','Soft margin on toy dataset');axis([-1 1 -1 1]);hold on; 
+function [] = draw_soft_margin(data,labels,a,b,sv,figurename)
+    figure('name',figurename);axis([-1 1 -1 1]);hold on; 
     xmin = min(data,[],2);
     xmax = max(data,[],2);
 

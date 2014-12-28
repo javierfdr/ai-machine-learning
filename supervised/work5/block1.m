@@ -10,7 +10,8 @@ load example_dataset_1.mat;
 
 input('Press enter to calculate hard margin');
 [a,b,sv] = train_hard_margin(data',labels');
-figure('name','Hard margin on toy dataset');axis([-1 1 -1 1]);hold on; 
+figure('name','Hard margin on toy dataset');axis([-1 1 -1 1]);hold on;
+sv
 xmin = min(data,[],2);
 xmax = max(data,[],2);
 
@@ -38,6 +39,4 @@ x = linspace(-1,1,100);
 y = (-1-(a(1)*x)-b)/a(2); % margin line == 1
 plot(x,y,'g--'); hold on;
 
-
-
-
+input('Press enter to proceed to next section...');
