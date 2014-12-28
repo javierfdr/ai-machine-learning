@@ -31,7 +31,7 @@ clear all; close all; clc;
 load nonlinear-toy-dataset;
 
 input('Press enter to calculate Soft margin for non-linear dataset lambda=0');
-[a,b,sv] = train_soft_margin(data',labels',0)
+[a,b,sv] = train_soft_margin(data',labels',0);
 draw_soft_margin(data,labels,a,b,sv,'Soft margin on toy dataset lambda 0');
 
 input('Press enter to proceed to next section...');

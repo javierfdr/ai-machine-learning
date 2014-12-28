@@ -10,7 +10,8 @@ load example_dataset_1.mat;
 
 input('Press enter to calculate hard margin');
 [a,b,sv] = train_hard_margin(data',labels');
-figure('name','Hard margin on toy dataset');axis([-1 1 -1 1]);hold on; 
+figure('name','Hard margin on toy dataset');axis([-1 1 -1 1]);hold on;
+sv
 xmin = min(data,[],2);
 xmax = max(data,[],2);
 

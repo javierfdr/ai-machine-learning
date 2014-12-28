@@ -6,7 +6,7 @@
 clear all; close all; clc;
 load example_dataset_3.mat;
 
-input('Press enter to search for best lambda with normal error');
+input('Press enter to search for best lambda with normal and weighted error');
 bestError = realmax;
 bestLambda = -1;
 bestA = [];

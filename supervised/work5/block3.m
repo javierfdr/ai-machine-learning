@@ -28,7 +28,7 @@ clear all; close all; clc;
 load example_dataset_2.mat;
 
 input('Press enter to calculate Soft margin for linear dataset and constrained solution');
-[a,b,sv,u] = train_soft_margin_constrained(data',labels',10);
+[a,b,sv,u] = train_soft_margin_constrained(data',labels',10)
 %draw_soft_margin(data,labels,a,b,sv,'Soft margin (constrained) on example_dataset_2 lambda 10');
 
 % Just checking that the two constrained solutions are equal

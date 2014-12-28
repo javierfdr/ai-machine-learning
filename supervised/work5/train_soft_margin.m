@@ -19,6 +19,6 @@ function [a,b,sv,error] = train_soft_margin(data, labels, lambda)
     data2 = data(labels==1,:);
     
     sv = [data1(svdis1,:);data2(svdis2,:)];
-    error = sum(max(0,1-labels'.*((a'*data)+b)));
+    error = sum(max(0,1-labels.*((a'*data')+b)));
     
 end

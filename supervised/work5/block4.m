@@ -37,7 +37,8 @@ load example_dataset_2.mat;
 input('Press enter to calculate Soft margin lambda=10');
 [a,b,sv,v] = train_soft_margin_dual(data',labels',10);
 %draw_soft_margin(data,labels,a,b,sv,'Soft margin (dual) on example_dataset_2 lambda 10');
-disp(v');
-disp((1e-5*10 < v')&(v' < 10));
+v'
+lambda = 10;
+(1e-5*lambda < v')&(v' < lambda)
 
 input('Press enter to proceed to next section...');
