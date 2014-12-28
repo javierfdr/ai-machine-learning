@@ -9,6 +9,9 @@ function [NewSTDData,Weights, Features] = reliefSelection(STDData, Categories, K
             weights(1,i)=0;
         end
     end
+    
+    disp(weights);
+    
     threshold = nanmean(weights);
     
     % With dimensionality reduction
