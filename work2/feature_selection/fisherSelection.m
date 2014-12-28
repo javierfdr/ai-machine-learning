@@ -1,14 +1,19 @@
 
-% Applies Relief-F method to input data and returns a reduced input data
+% Applies Fisher Score method to input data and returns a reduced input data
 % matrix where features with a relevance lower than threshold are removed
-function [NewSTDData,Weights, Features] = reliefSelection(STDData, Categories, K)
-    [ranked,weights] = relieff(STDData,Categories,K);
+function [NewSTDData,Weights, Features] = fisherSelection(STDData, Categories)
+    categoriesNum = categoriesToNum(Categories);
+
+    out = fsFisher(STDData,categoriesNum);
+    ranked = out.fList;
+    weights = out.W;
     
     for i=1:size(weights,2)
         if isnan(weights(1,i))
             weights(1,i)=0;
         end
     end
+    
     threshold = nanmean(weights);
     
     % With dimensionality reduction
