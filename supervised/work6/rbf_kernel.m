@@ -4,12 +4,10 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Inputs:
-%        X : m*n matrix, m examples, n features
+%        L2 : L2 distance of the points
 %        sigma : sigma for rbf
 % Outputs:
 %        K : Gramm Matrix for X with sigma
-%        L2 : L2 distance of the points
-function [K,L2] = gramm_matrix(X,sigma)
-    L2 = L2_distance(X,X);
-    K = rbf_kernel(L2,sigma);
+function K = rbf_kernel(L2,sigma)
+    K = exp((-(L2.^2)) ./ (2*(sigma^2)));
 end
