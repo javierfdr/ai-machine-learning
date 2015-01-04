@@ -4,3 +4,5 @@
 
 %% This script does the work related to question block 1
 clear all; close all; clc;
+load example_dataset_1.mat;
+gramm_matrix(data',1)
