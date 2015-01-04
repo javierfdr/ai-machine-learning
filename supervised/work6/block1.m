@@ -10,7 +10,7 @@ figure('name','Gramm Matrix');
 imagesc(K);
 %[max,idx] = max(K); % max values are always on the diagonal
 [V,D] = eig(K);
-sum(sum(D < -1e-15)) % this must be zero to be pos def
+sum(sum(D < -1e-10)) % this must be zero to be pos def
 figure('name','L2 distance');
 imagesc(L2);
 [afunc,sv,v,error] = train_soft_margin_dual_rbf(data',labels',1,1);

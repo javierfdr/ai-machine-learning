@@ -18,8 +18,16 @@ errorLabelTest = [];
 meanErrorTest = [];
 errorLabelTrain = [];
 meanErrorTrain = [];
+
+bestSigma = -1;
+bestLambda = -1;
+bestError = realmax;
+
+count = 0;
+
 for sigma=[0.5:0.1:1.5]
     for c=[0.5:0.5:5]
+        disp(strcat('Lambda: ',num2str(c),' Sigma: ',num2str(sigma)));
         for f=1:K        
             vf = ValidationFolds(f,:);
             tf = TrainingFolds(f,:);
@@ -27,39 +35,54 @@ for sigma=[0.5:0.1:1.5]
             tdata = dataT(tf',:);
             tlabels = labels(tf');
 
-            tree = classregtree(tdata,tlabels,'minparent',p);
+            %tree = classregtree(tdata,tlabels,'minparent',p);
+            [afunc,sv,v,error] = train_soft_margin_dual_rbf(tdata,tlabels',1,1);
+            errorLabelTrain = [errorLabelTrain;error];            
+            
             vdata = dataT(vf',:);
 
             % testing tree against test data
-            y = tree(vdata);
+            y = sign(afunc(vdata'));
             vlabels = labels(vf');
-            [error,accuracy] = getTreeError(y,vlabels);
+            
+            [error,accuracy] = getClassificationError(y,vlabels);
             errorLabelTest = [errorLabelTest;error];
 
-            % testing tree agains training data (to understand overfitting)
-            y = tree(tdata);
-            [error,accuracy] = getTreeError(y,tlabels); 
-            errorLabelTrain = [errorLabelTrain;error];
 
         end
-        meanErrorTest = [meanErrorTest;mean(errorLabelTest)];
+        count = count+1;
+        
+        currentMinError = mean(errorLabelTest);
+        if currentMinError < bestError
+            bestError = currentMinError;
+            bestSigma = sigma;
+            bestLambda = c;            
+        end
+        
+        meanErrorTest = [meanErrorTest;mean(currentMinError)];
         meanErrorTrain = [meanErrorTrain;mean(errorLabelTrain)];
     end
 end
+disp('Mean Error Test');
 disp(meanErrorTest);
+disp('Best Error');
+disp(bestError);
+disp('Best Sigma');
+disp(bestSigma);
+disp('Best Lambda');
+disp(bestLambda);
 
 % plotting error surface
 h = figure('name','Mean error for different minparent values on Decision Tree');
-plot([1:15],meanErrorTest','rx'); hold on;
-plot([1:15],meanErrorTest','r-'); hold on;
+plot([1:count],meanErrorTest','rx'); hold on;
+plot([1:count],meanErrorTest','r-'); hold on;
 
 % plotting error surface
 h = figure('name','Train vs Test Mean error for different minparent values on Decision Tree');
-plot([1:15],meanErrorTest','rx'); hold on;
-plot([1:15],meanErrorTest','r-'); hold on;
-plot([1:15],meanErrorTrain','bo'); hold on;
-plot([1:15],meanErrorTrain','b-'); hold on;
-
+plot([1:count],meanErrorTest','rx'); hold on;
+plot([1:count],meanErrorTest','r-'); hold on;
+plot([1:count],meanErrorTrain','bo'); hold on;
+plot([1:count],meanErrorTrain','b-'); hold on;
 
 
 input('Press enter to calculate and show the best configuration for Decision Trees');
@@ -85,12 +108,12 @@ for p=1:15
         % testing tree against test data
         y = tree(vdata);
         vlabels = labels(vf');
-        [error,accuracy] = getTreeError(y,vlabels);
+        [error,accuracy] = getClassificationError(y,vlabels);
         errorLabelTest = [errorLabelTest;error];
         
         % testing tree agains training data (to understand overfitting)
         y = tree(tdata);
-        [error,accuracy] = getTreeError(y,tlabels); 
+        [error,accuracy] = getClassificationError(y,tlabels); 
         errorLabelTrain = [errorLabelTrain;error];
         
     end
