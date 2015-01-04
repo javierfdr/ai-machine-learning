@@ -12,10 +12,10 @@ function [afunc,sv,v,error] = train_soft_margin_dual_rbf(data, labels, lambda, s
             v'*labels' == 0
     cvx_end
     
-    svindex = ((1e-5*lambda < v)&(v < lambda));
+    svindex = v > ((1e-9/lambda)^sigma);
     sv = data(svindex,:);
     
     afunc = @(nx) (v'*y*rbf_kernel(L2_distance(x,nx),sigma))';
-    %error = sum(max(0,1-labels.*((a'*data'))));
-    error = 0;
+    error = sum(v);
+    
 end
