@@ -22,12 +22,14 @@ meanErrorTrain = [];
 bestSigma = -1;
 bestLambda = -1;
 bestError = realmax;
+bestCount = 0;
 
 count = 0;
 
-for sigma=[0.5:0.1:1.5]
-    for c=[0.5:0.5:5]
-        disp(strcat('Lambda: ',num2str(c),' Sigma: ',num2str(sigma)));
+for sigma=[0.5:0.1:1]
+    for c=[0.5:0.5:10]
+        count = count+1;
+        disp(strcat('Iter:',num2str(count),'Lambda: ',num2str(c),' Sigma: ',num2str(sigma)));
         for f=1:K        
             vf = ValidationFolds(f,:);
             tf = TrainingFolds(f,:);
@@ -36,8 +38,7 @@ for sigma=[0.5:0.1:1.5]
             tlabels = labels(tf');
 
             %tree = classregtree(tdata,tlabels,'minparent',p);
-            [afunc,sv,v,error] = train_soft_margin_dual_rbf(tdata,tlabels',1,1);
-            errorLabelTrain = [errorLabelTrain;error];            
+            [afunc,sv,v,error] = train_soft_margin_dual_rbf(tdata,tlabels',c,sigma);
             
             vdata = dataT(vf',:);
 
@@ -47,16 +48,19 @@ for sigma=[0.5:0.1:1.5]
             
             [error,accuracy] = getClassificationError(y,vlabels);
             errorLabelTest = [errorLabelTest;error];
-
+            
+            y = sign(afunc(tdata'));
+            [error,accuracy] = getClassificationError(y,tlabels);
+            errorLabelTrain = [errorLabelTrain;error];
 
         end
-        count = count+1;
         
         currentMinError = mean(errorLabelTest);
         if currentMinError < bestError
             bestError = currentMinError;
             bestSigma = sigma;
-            bestLambda = c;            
+            bestLambda = c;
+            bestCount = count;
         end
         
         meanErrorTest = [meanErrorTest;mean(currentMinError)];
