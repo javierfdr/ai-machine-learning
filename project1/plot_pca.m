@@ -2,17 +2,22 @@ function [cHash] = plot_pca(k, cluster_vector, categories, pca_data, save, plot_
     
     is_visible = 'off';
 
-
     %%Creating help hashes for plotting
     % create a hash for assigning a number to a category
+    
     catNumHash = containers.Map();
     catName = containers.Map();
     count = 1;
     for i=1:size(categories(:,1),1)
-        if ~(catNumHash.isKey(char(categories(i,1))))
-            catNumHash(char(categories(i,1))) = count;
-            catName(num2str(count)) = char(categories(i,1));
-            count = count+1;
+        if isfloat(categories(i,1))
+            index = char(num2str(categories(i,1)));
+        else
+            index = char(categories(i,1));
+        end
+        if ~(catNumHash.isKey(index))
+            catNumHash(index) = count;
+            catName(num2str(count)) = char(index);
+            count = count+1; 
         end
     end
 
@@ -20,11 +25,16 @@ function [cHash] = plot_pca(k, cluster_vector, categories, pca_data, save, plot_
     cHash = containers.Map();
     for i=1:size(cluster_vector(:,1),1)
         clusNum = cluster_vector(i,1);
+        if isfloat(categories(i,1))
+            value = char(num2str(categories(i,1)));
+        else
+            value = char(categories(i,1));
+        end
         if ~(cHash.isKey(num2str(clusNum)))
-            cHash(num2str(clusNum)) = [pca_data(i,:),catNumHash(char(categories(i,1)))];
+            cHash(num2str(clusNum)) = [pca_data(i,:),catNumHash(value)];
         else
             row = cHash(num2str(clusNum));
-            cHash(num2str(clusNum)) = [row;[pca_data(i,:),catNumHash(char(categories(i,1)))]];
+            cHash(num2str(clusNum)) = [row;[pca_data(i,:),catNumHash(value)]];
         end
     end
     

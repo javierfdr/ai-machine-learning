@@ -38,7 +38,8 @@ function [] = pfcm_hi_typ_plotter(standarized_data,categories,klist,niters,natte
             standarized_data = standarized_data_org;
             categories = categories_org;
             [cluster_vector, fcv, pcv, centroids, nit, err] = pfcmv(standarized_data, klist(i), niters, fm, fn, fa, fb, epsilon, round_results);
-            typ_threshold = 1/(klist(i)*2);
+            %typ_threshold = 1/(klist(i)*1.2);
+            typ_threshold = 0.98;
             hi_typ_vector = boolean(sum(pcv > typ_threshold, 2));
             cluster_vector = cluster_vector(hi_typ_vector,:);
             standarized_data = standarized_data(hi_typ_vector,:);
@@ -71,13 +72,13 @@ function [] = pfcm_hi_typ_plotter(standarized_data,categories,klist,niters,natte
             catNumHash = containers.Map();
             count = 1;
             target_clusters = [];
-            for i=1:size(categories(:,1),1)
-                if ~(catNumHash.isKey(char(categories(i,1))))
-                    catNumHash(char(categories(i,1))) = count;
+            for p=1:size(categories(:,1),1)
+                if ~(catNumHash.isKey(char(categories(p,1))))
+                    catNumHash(char(categories(p,1))) = count;
                     target_clusters = [target_clusters,count];
                     count = count+1;
                 else
-                    target_clusters = [target_clusters,catNumHash(char(categories(i,1)))];
+                    target_clusters = [target_clusters,catNumHash(char(categories(p,1)))];
                 end
             end
 
@@ -88,6 +89,35 @@ function [] = pfcm_hi_typ_plotter(standarized_data,categories,klist,niters,natte
             
             % accummulate silhouette mean index
             sil_mean_list = [sil_mean_list, mean_sil];
+        
+            clusdata = zeros(klist(i),3);
+            for l=1:klist(i)
+                disp(strcat('CLUS ',num2str(l)));
+                for j=1:size(cluster_vector,1)
+                    d=categories{j,1};
+                    if double(cluster_vector(j)) == double(l)
+                        pos = -1;
+                        if strcmp(d,char('winhome'))
+                            pos =1;
+                        elseif strcmp(d,char('winaway'))
+                            pos = 3;
+                        elseif strcmp(d,char('draw'))
+                            pos = 2;
+                        end
+                        
+                        clusdata(l,pos)=clusdata(l,pos)+1;
+                    end
+                end
+            end
+            clusdata
+            for row=1:size(clusdata,1)
+                s = sum(clusdata(row,:));
+                disp(strcat(num2str(100.*clusdata(row,1)./s),'%'));
+                disp(strcat(num2str(100.*clusdata(row,2)./s),'%'));
+                disp(strcat(num2str(100.*clusdata(row,3)./s),'%'));
+                disp('\n');
+            end
+        
         end
         attempts_adjusted_i_list = [attempts_adjusted_i_list;adjusted_i_list];
         attempts_sil_mean_list = [attempts_sil_mean_list;sil_mean_list];
@@ -117,4 +147,6 @@ function [] = pfcm_hi_typ_plotter(standarized_data,categories,klist,niters,natte
     plot_name = strcat(save_file_path,'silhouette-mean-index',num2str(attempt_count));
     saveas(h,plot_name,'png');
 
+
+        
 end
