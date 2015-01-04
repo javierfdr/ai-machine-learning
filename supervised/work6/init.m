@@ -7,3 +7,5 @@
 cd ./cvx
 cvx_setup
 cd ..
+
+addpath(genpath('datasets'))

@@ -167,5 +167,5 @@ disp('Best minparent');
 disp(bestMinParentEver);
 
 disp('Mean Error');
-disp(mean(listErrrors));
+disp(mean(listErrors));
 
