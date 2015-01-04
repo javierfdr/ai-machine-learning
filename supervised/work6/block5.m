@@ -6,15 +6,28 @@
 clear all; close all; clc;
 load example_dataset_1.mat;
 
-input('Press enter to calculate best parameters on Decision Trees');
-
 dataT = data';
 
-% splitting data to divide training and test set
+sizeData = size(dataT,1);
 
+% splitting data to divide training and test set
+p=randperm(size(dataT,1));
+fifth = sizeData/5;
+
+% since p is random positions then taking the first fifth does not 
+% affect
+TestData = dataT(p(1:fifth),:);
+TestLabels = labels(p(1:fifth),:);
+dataT = dataT(p(fifth+1:size(dataT,1)),:);
+labels = labels(p(fifth+1:sizeData),:);
 
 K = 5;
 [TrainingFolds, ValidationFolds] = buildFoldValidationSets(dataT, K);
+input('Press enter to calculate and show the best configuration for Decision Trees');
+
+
+%Testing RBF with cross validation
+
 
 % Testing Decision Trees with cross validation
 % testing for minparent from 1 to 10 (size/10).
@@ -22,7 +35,13 @@ errorLabelTest = [];
 meanErrorTest = [];
 errorLabelTrain = [];
 meanErrorTrain = [];
-for p=1:15
+
+bestMinParent = -1;
+bestError = realmax;
+
+numMinParent = 15;
+
+for p=1:numMinParent
     for f=1:K        
         vf = ValidationFolds(f,:);
         tf = TrainingFolds(f,:);
@@ -37,29 +56,42 @@ for p=1:15
         % testing tree against test data
         y = tree(vdata);
         vlabels = labels(vf');
-        [error,accuracy] = getTreeError(y,vlabels);
+        [error,accuracy] = getClassificationError(y,vlabels);
         errorLabelTest = [errorLabelTest;error];
         
         % testing tree agains training data (to understand overfitting)
         y = tree(tdata);
-        [error,accuracy] = getTreeError(y,tlabels); 
+        [error,accuracy] = getClassificationError(y,tlabels); 
         errorLabelTrain = [errorLabelTrain;error];
         
     end
+    
+    currentMinError = mean(errorLabelTest);
+    if currentMinError < bestError
+        bestError = currentMinError;
+        bestMinParent = p;
+    end    
+    
     meanErrorTest = [meanErrorTest;mean(errorLabelTest)];
     meanErrorTrain = [meanErrorTrain;mean(errorLabelTrain)];
 end
+
+disp('Mean Error Test');
 disp(meanErrorTest);
+disp('Best Error');
+disp(bestError);
+disp('Best minparent');
+disp(bestMinParent);
 
-% plotting error surface
-h = figure('name','Mean error for different minparent values on Decision Tree');
-plot([1:15],meanErrorTest','rx'); hold on;
-plot([1:15],meanErrorTest','r-'); hold on;
+% calculating with best min parent against test set
+tree = classregtree(dataT,labels,'minparent',bestMinParent);
 
-% plotting error surface
-h = figure('name','Train vs Test Mean error for different minparent values on Decision Tree');
-plot([1:15],meanErrorTest','rx'); hold on;
-plot([1:15],meanErrorTest','r-'); hold on;
-plot([1:15],meanErrorTrain','bo'); hold on;
-plot([1:15],meanErrorTrain','b-'); hold on;
+% testing tree against test data
+y = tree(TestData);
+[error,accuracy] = getClassificationError(y,TestLabels);
+disp(strcat('Error with minParent',num2str(bestMinParent)));
+disp(error);
+
+
+
 
