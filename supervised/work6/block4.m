@@ -29,7 +29,7 @@ count = 0;
 for sigma=[0.5:0.1:1]
     for c=[0.5:0.5:10]
         count = count+1;
-        disp(strcat('Iter:',num2str(count),'Lambda: ',num2str(c),' Sigma: ',num2str(sigma)));
+        disp(strcat('Iter:',num2str(count),' Lambda: ',num2str(c),' Sigma: ',num2str(sigma)));
         for f=1:K        
             vf = ValidationFolds(f,:);
             tf = TrainingFolds(f,:);
