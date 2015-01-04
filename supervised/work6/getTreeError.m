@@ -8,6 +8,6 @@ function [error,accuracy] = getTreeError(result,labels)
 
     wellClassified = wellClassified1+wellClassified2;
 
-    accuracy = wellClassified/size(labels,1);
+    accuracy = wellClassified/(size(class1,1)+size(class2,1));
     error = 1-accuracy;
 end
