@@ -26,8 +26,8 @@ bestCount = 0;
 
 count = 0;
 
-for sigma=[0.5:0.1:1]
-    for c=[0.5:0.5:10]
+for sigma=0.5:-0.1:0.1
+    for c=1:1:20
         count = count+1;
         disp(strcat('Iter:',num2str(count),' Lambda: ',num2str(c),' Sigma: ',num2str(sigma)));
         for f=1:K        
@@ -55,15 +55,15 @@ for sigma=[0.5:0.1:1]
 
         end
         
-        currentMinError = mean(errorLabelTest);
-        if currentMinError < bestError
-            bestError = currentMinError;
+        currentMeanError = mean(errorLabelTest);
+        if currentMeanError < bestError
+            bestError = currentMeanError;
             bestSigma = sigma;
             bestLambda = c;
             bestCount = count;
         end
         
-        meanErrorTest = [meanErrorTest;mean(currentMinError)];
+        meanErrorTest = [meanErrorTest;mean(errorLabelTest)];
         meanErrorTrain = [meanErrorTrain;mean(errorLabelTrain)];
     end
 end
@@ -77,17 +77,17 @@ disp('Best Lambda');
 disp(bestLambda);
 
 % plotting error surface
-h = figure('name','Mean error for different minparent values on Decision Tree');
-plot([1:count],meanErrorTest','rx'); hold on;
-plot([1:count],meanErrorTest','r-'); hold on;
+% h = figure('name','Mean error for different minparent values on Decision Tree');
+% plot([1:count],meanErrorTest','rx'); hold on;
+% plot([1:count],meanErrorTest','r-'); hold on;
 
 % plotting error surface
-h = figure('name','Train vs Test Mean error for different minparent values on Decision Tree');
+h = figure('name','Train vs Test Mean error for different minparent values on SVM RBF');
 plot([1:count],meanErrorTest','rx'); hold on;
 plot([1:count],meanErrorTest','r-'); hold on;
 plot([1:count],meanErrorTrain','bo'); hold on;
 plot([1:count],meanErrorTrain','b-'); hold on;
-
+plot([1:count],abs(meanErrorTest'-meanErrorTrain'),'g'); hold on;
 
 input('Press enter to calculate and show the best configuration for Decision Trees');
 
@@ -137,7 +137,3 @@ plot([1:15],meanErrorTest','rx'); hold on;
 plot([1:15],meanErrorTest','r-'); hold on;
 plot([1:15],meanErrorTrain','bo'); hold on;
 plot([1:15],meanErrorTrain','b-'); hold on;
-
-
-
-
