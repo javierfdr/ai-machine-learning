@@ -94,9 +94,8 @@ disp(bestLambda);
 % testing against test data
 y = sign(afunc(TestData'));
 [error,accuracy] = getClassificationError(y,TestLabels);
-disp(strcat('Error with best combination')));
+disp(strcat('Error with best combination'));
 disp(error);
-
 
 
 %% Testing Decision Trees with cross validation
