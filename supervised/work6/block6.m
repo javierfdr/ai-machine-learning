@@ -22,6 +22,7 @@ bestSigmaEver = realmax;
 bestLambdaEver = realmax;
 bestErrorEver = realmax;
 bestCount = 0;
+listErrors = [];
 
 count = 0;
 
@@ -77,6 +78,7 @@ for f=1:K
     end
     
     disp(strcat('For K=',num2str(f),' best lambda is: ',num2str(bestLambda),' best sigma: ',num2str(bestSigma),' best error: ',num2str(bestError)));
+    listErrors = [listErrors;bestError];
     
     if (bestError < bestErrorEver)
         bestErrorEver = bestError;
@@ -92,6 +94,8 @@ disp('Best Sigma');
 disp(bestSigmaEver);
 disp('Best Lambda');
 disp(bestLambdaEver);
+disp('Mean Error');
+disp(mean(listErrors));
 
 
 input('Press enter to calculate and show the best configuration for Decision Trees');
@@ -102,6 +106,8 @@ errorLabelTest = [];
 meanErrorTest = [];
 errorLabelTrain = [];
 meanErrorTrain = [];
+
+listErrors = [];
 
 bestMinParentEver = realmax;
 bestErrorEver = realmax;
@@ -147,6 +153,7 @@ for f=1:K
         meanErrorTrain = [meanErrorTrain;mean(errorLabelTrain)];
     end
     disp(strcat('For K=',num2str(f),' best minparent is: ',num2str(bestMinParent),' and best error: ',num2str(bestError)));
+    listErrors = [listErrors;bestError];
     
     if (bestError < bestErrorEver)
         bestMinParentEver = bestMinParent;
@@ -158,4 +165,7 @@ disp('Best Error');
 disp(bestErrorEver);
 disp('Best minparent');
 disp(bestMinParentEver);
+
+disp('Mean Error');
+disp(mean(listErrrors));
 
