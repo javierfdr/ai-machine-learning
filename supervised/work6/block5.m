@@ -23,14 +23,87 @@ labels = labels(p(fifth+1:sizeData),:);
 
 K = 5;
 [TrainingFolds, ValidationFolds] = buildFoldValidationSets(dataT, K);
+input('Press enter to calculate and show the best configuration for RBF SVM');
+
+
+%Testing RBF - SVM with cross validation
+errorLabelTest = [];
+meanErrorTest = [];
+errorLabelTrain = [];
+meanErrorTrain = [];
+
+bestSigma = -1;
+bestLambda = -1;
+bestError = realmax;
+bestCount = 0;
+
+count = 0;
+
+for sigma=0.5:-0.1:0.1
+    for c=1:1:20
+        count = count+1;
+        disp(strcat('Iter:',num2str(count),' Lambda: ',num2str(c),' Sigma: ',num2str(sigma)));
+        for f=1:K        
+            vf = ValidationFolds(f,:);
+            tf = TrainingFolds(f,:);
+
+            tdata = dataT(tf',:);
+            tlabels = labels(tf');
+
+            %tree = classregtree(tdata,tlabels,'minparent',p);
+            [afunc,sv,v,error] = train_soft_margin_dual_rbf(tdata,tlabels',c,sigma);
+            
+            vdata = dataT(vf',:);
+
+            % testing tree against test data
+            y = sign(afunc(vdata'));
+            vlabels = labels(vf');
+            
+            [error,accuracy] = getClassificationError(y,vlabels);
+            errorLabelTest = [errorLabelTest;error];
+            
+            y = sign(afunc(tdata'));
+            [error,accuracy] = getClassificationError(y,tlabels);
+            errorLabelTrain = [errorLabelTrain;error];
+
+        end
+        
+        currentMeanError = mean(errorLabelTest);
+        if currentMeanError < bestError
+            bestError = currentMeanError;
+            bestSigma = sigma;
+            bestLambda = c;
+            bestCount = count;
+        end
+        
+        meanErrorTest = [meanErrorTest;mean(errorLabelTest)];
+        meanErrorTrain = [meanErrorTrain;mean(errorLabelTrain)];
+    end
+end
+
+disp('Best Error');
+disp(bestError);
+disp('Best Sigma');
+disp(bestSigma);
+disp('Best Lambda');
+disp(bestLambda);
+
+% Training the best combination
+[afunc,sv,v,error] = train_soft_margin_dual_rbf(dataT,labels',bestLambda,bestSigma);
+
+% testing against test data
+y = sign(afunc(TestData'));
+[error,accuracy] = getClassificationError(y,TestLabels);
+disp(strcat('Error with best combination')));
+disp(error);
+
+
+
+%% Testing Decision Trees with cross validation
+% testing for minparent from 1 to 10 (size/10).
+
 input('Press enter to calculate and show the best configuration for Decision Trees');
 
-
-%Testing RBF with cross validation
-
-
-% Testing Decision Trees with cross validation
-% testing for minparent from 1 to 10 (size/10).
 errorLabelTest = [];
 meanErrorTest = [];
 errorLabelTrain = [];

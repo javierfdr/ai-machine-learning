@@ -12,8 +12,7 @@ dataT = data';
 K = 5;
 [TrainingFolds, ValidationFolds] = buildFoldValidationSets(dataT, K);
 
-% Testing Decision Trees with cross validation
-% testing for minparent from 1 to 10 (size/10).
+% Testing RBF SVM with cross validation
 errorLabelTest = [];
 meanErrorTest = [];
 errorLabelTrain = [];
