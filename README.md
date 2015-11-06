@@ -1,6 +1,7 @@
 # README #
 
-Multiple machine learning projects covering:
+# Multiple machine learning projects covering:
+
 * Gradient Descend - based methods
 * Dimensionality Reduction
 * Clustering
